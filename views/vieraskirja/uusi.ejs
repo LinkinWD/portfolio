@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Uusi kirjoitus</title>
+</head>
+<body>
+    <h1>Lisää uusi kirjoitus.</h1>
+    <form action="/vieraskirja" method="post">
+    <div>
+        <label for="kirjoittaja">Kirjoittajan nimi</label>
+        <input type="text" id="kirjoittaja" name="vieraskirja[kirjoittaja]">
+    </div>
+    <div>
+        <label for="kommentti">Kommentti:</label>
+        <input type="text" id="kommentti" name="vieraskirja[kommentti]">
+    </div>
+    <button>Lisää kommentti</button>
+</form>
+</body>
+</html>
