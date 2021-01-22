@@ -12,7 +12,10 @@
         <% for(merkintä of vieraskirja) { %>
             <li>Tekijä: <%= merkintä.kirjoittaja %> Tehty: <%= merkintä.koska %>  </li>
             <li>Kommentti: <%= merkintä.kommentti %> </li>
-        <% } %> 
+            <a href="/vieraskirja/<%= merkintä._id %>/edit">Muokkaa tai poista kommentti</a> 
+        <% } %>
+        
     </ul>
+
 </body>
 </html>

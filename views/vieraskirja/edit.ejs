@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Muuta kirjoitusta</title>
+</head>
+<body>
+    <h1>Kirjoitus</h1>
+    <!-- käytetään overrideä -->
+    <form action="/vieraskirja/<%= kommentti._id %>?_method=PUT" method="post">
+    <div>
+        <label for="kirjoittaja"><%=kommentti.kirjoittaja%> </label>
+        
+    </div>
+    <div>
+        <label for="kommentti">Kommentti:</label>
+        <input type="text" id="kommentti" name="vieraskirja[kommentti]" value="<%=kommentti.kommentti%> ">
+    </div>
+    <button>Muuta kommenttia</button>
+    
+
+    <a href="/vieraskirja">Palaa takaisin</a>
+</form>
+<form action="/vieraskirja/<%= kommentti._id %>?_method=DELETE" method="POST">
+    <button>Poista kommentti</button>
+    </form>
+</body>
+</html>
