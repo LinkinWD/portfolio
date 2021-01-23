@@ -1,12 +1,25 @@
 <% layout('/layouts/boilerplate') %> 
     <h1>Vieraskirja</h1>
     <p>Tervetuloa vieraskirjaan</p>
-    <ul>
+    <a class="btn btn-primary" href="/vieraskirja/uusi">Uusi kommentti</a>
         <% for(merkintä of vieraskirja) { %>
-            <li>Tekijä: <%= merkintä.kirjoittaja %> Tehty: <%= merkintä.koska %>  </li>
-            <li>Kommentti: <%= merkintä.kommentti %> </li>
-            <a href="/vieraskirja/<%= merkintä._id %>/edit">Muokkaa tai poista kommentti</a> 
+            <div class="card mb-3">
+                <div class="row">
+                <div class="card-body col-md-3">
+                  <h5 class="card-title"><%= merkintä.kirjoittaja %> </h5>
+                  <p class="card-text text-muted"><%= merkintä.koska %> </p>
+                </div>
+                <div class="card-body col-md-6">
+                  <p class="card-text"><%= merkintä.kommentti %> </p>
+                </div>
+                  <div class="card-body col-md-3">
+                  <a href="/vieraskirja/<%= merkintä._id %>/edit" class="btn btn-primary">Muokkaa tai kommenttia</a>
+                 
+                </div>
+                </div>
+              </div>
+              
         <% } %>
         
-    </ul>
+    
 

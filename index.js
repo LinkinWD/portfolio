@@ -71,7 +71,7 @@ app.put('/vieraskirja/:id', async(req, res) => {
     // console.log(req.params)
     const kommentti = await Vieraskirja.findByIdAndUpdate(id, {...req.body.vieraskirja})
     // console.log(kommentti)
-    res.redirect(`/vieraskirja`)
+    res.redirect(`vieraskirja`)
 })
 
 app.delete('/vieraskirja/:id', async (req, res) => {
