@@ -1,0 +1,8 @@
+<% layout('/layouts/boilerplate') %> 
+<h1>Myymälä</h1>
+<ul>
+    <li>Tuote:    Määrä:    Hinta:</li>
+<% for(tuote of tuotteet) { %> 
+    <li><%= tuote.nimi %> : <%= tuote.määrä %> annosta: <%= tuote.hinta %> €  </li>
+<% } %> 
+</ul>

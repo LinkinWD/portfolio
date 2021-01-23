@@ -4,6 +4,7 @@ const path = require('path')
 const mongoose = require('mongoose')
 const ejsMate = require('ejs-mate')
 const Vieraskirja = require('./models/vieraskirja')
+const Ruoka = require('./models/ruoka')
 
 //Yhdistetään tietokantaan
 mongoose.connect('mongodb://localhost:27017/portfolio', {
@@ -77,6 +78,17 @@ app.delete('/vieraskirja/:id', async (req, res) => {
     const { id } = req.params
     await Vieraskirja.findByIdAndDelete(id)
     res.redirect('/vieraskirja')
+})
+
+app.get('/ruokala', async(req, res) => {
+    const tuotteet = await Ruoka.find({})
+    // console.log(tuotteet)
+    res.render('ruokala/index', {tuotteet})
+} ) 
+
+app.get('/kassa', async(req, res) => {
+    const tuotteet = await Ruoka.find({})
+    res.render('ruokala/kassa', { tuotteet})
 })
 
 app.listen(3000, () => {
