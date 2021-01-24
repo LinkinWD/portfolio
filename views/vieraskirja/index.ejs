@@ -17,7 +17,18 @@
                  
                 </div>
                 </div>
+               
+                  
+                  <% for (kommentti of merkintä.kommentit) { %>
+                  <p><%= kommentti.kirjoittaja %> </p>
+                  <p><%= kommentti.kommentti %> </p> 
+                  <% } %> 
+               
               </div>
+              </div>
+              <div>
+                
+      
               <h3>Jätä kommentti</h3>
               <form action="/vieraskirja/<%=merkintä._id%>/kommentit" method="POST" novalidate class="validoi-tämä">
                 <div class="mb-1">
@@ -38,5 +49,4 @@
               </form>
         <% } %>
         
-    
-
+       

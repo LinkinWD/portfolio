@@ -76,8 +76,8 @@ app.get('/', (req, res) => {
 
 app.get('/vieraskirja',  catchAsync(async(req, res) => {
     //async functio, että voidaan odottaa, kun tiedot haetaa tietokannasta
-    const vieraskirja = await Vieraskirja.find({})
-    // console.log(vieraskirja)
+    const vieraskirja = await Vieraskirja.find({}).populate('kommentit')
+    console.log(vieraskirja)
     //näytetään index sivu ja lähetetään 'vieraskirjan' tiedot databasesta
     res.render('vieraskirja/index', {vieraskirja})
 }))
