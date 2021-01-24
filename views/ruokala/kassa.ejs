@@ -1,2 +1,17 @@
 <% layout('/layouts/boilerplate') %> 
 <h1>kassa</h1>
+
+<h1>Myynyssä olevat tuotteeet</h1>
+
+<ul>
+    <li>Tuote:    Määrä:    Hinta:</li>
+<% for(tuote of tuotteet) { %> 
+    <li><%= tuote.nimi %> : <%= tuote.määrä %> annosta: <%= tuote.hinta %> €  </li>
+</form>
+<form action="/ruokala/<%= tuote._id %>?_method=DELETE" method="POST">
+    <button class="btn btn-danger">Poista tuote</button>
+    </form>
+<% } %> 
+</ul>
+
+<a class="btn btn-success" href="/ruokala/uusi">Lisää ruoka myyntiin</a>

@@ -6,6 +6,32 @@ const ejsMate = require('ejs-mate')
 const Vieraskirja = require('./models/vieraskirja')
 const Ruoka = require('./models/ruoka')
 
+
+//errorit ja validointi
+const catchAsync = require('./utils/catchAsync')
+const ExpressError = require('./utils/expressError')
+const { vieraskirjaSchema, ruokaSchema} = require('./schemas.js')
+
+const validoiVieraskirja = (req, res, next) => {
+// tämä on joi schema, ei mongoose. Se validoi ne nimet, mitkä löytyy [sisältä] inputista. Itse koodi on schemas.js
+const { error }= vieraskirjaSchema.validate(req.body)
+if(error) {
+    const msg = error.details.map(el => el.message).join(',')
+    throw new ExpressError(msg, 400)
+} else {
+    next()
+}}
+const validoiRuoka =(req, res, next) => {
+    const { error} = ruokaSchema.validate(req.body)
+    if(error) {
+        const msg = error.details.map(el => el.message).join(',')
+        throw new ExpressError(msg, 400)
+    } else {
+        next()
+    }    
+}
+
+
 //Yhdistetään tietokantaan
 mongoose.connect('mongodb://localhost:27017/portfolio', {
     useNewUrlParser: true,
@@ -38,57 +64,89 @@ app.get('/', (req, res) => {
     res.render('home')
 })
 
-app.get('/vieraskirja', async(req, res) => {
+app.get('/vieraskirja',  catchAsync(async(req, res) => {
     //async functio, että voidaan odottaa, kun tiedot haetaa tietokannasta
     const vieraskirja = await Vieraskirja.find({})
     // console.log(vieraskirja)
     //näytetään index sivu ja lähetetään 'vieraskirjan' tiedot databasesta
     res.render('vieraskirja/index', {vieraskirja})
-})
+}))
 
 app.get('/vieraskirja/uusi', (req, res) => {
    res.render('vieraskirja/uusi')
 
 })
 //takaisin tulevat commentit pitää parse:ta
-app.post('/vieraskirja', async (req, res) => {
-   // console.log(req.body)
+app.post('/vieraskirja', validoiVieraskirja, catchAsync(async (req, res) => {
+   // console.log(req.body) 
    const kommentti = new Vieraskirja(req.body.vieraskirja)
    await kommentti.save()
    res.redirect('vieraskirja')
-})
+}))
 
-app.get('/vieraskirja/:id/edit', async (req, res) => {
+app.get('/vieraskirja/:id/edit', catchAsync(async(req, res) => {
     //etsitää id:llä vieraskirjasta
     const kommentti = await Vieraskirja.findById(req.params.id)
     // console.log(req.params.id)
     res.render('vieraskirja/edit', { kommentti })
-})
+}))
 
-app.put('/vieraskirja/:id', async(req, res) => {
+app.put('/vieraskirja/:id', validoiVieraskirja, catchAsync(async(req, res) => {
     // res.send('toimii!')
     const { id } = req.params
     // console.log(req.params)
     const kommentti = await Vieraskirja.findByIdAndUpdate(id, {...req.body.vieraskirja})
     // console.log(kommentti)
-    res.redirect(`vieraskirja`)
-})
+    res.redirect(`/vieraskirja`)
+}))
 
-app.delete('/vieraskirja/:id', async (req, res) => {
+app.delete('/vieraskirja/:id', catchAsync(async(req, res) => {
     const { id } = req.params
     await Vieraskirja.findByIdAndDelete(id)
     res.redirect('/vieraskirja')
-})
+}))
 
-app.get('/ruokala', async(req, res) => {
+app.get('/ruokala', catchAsync(async(req, res) => {
     const tuotteet = await Ruoka.find({})
     // console.log(tuotteet)
     res.render('ruokala/index', {tuotteet})
-} ) 
+})) 
 
-app.get('/kassa', async(req, res) => {
+app.get('/kassa', catchAsync(async(req, res) => {
     const tuotteet = await Ruoka.find({})
     res.render('ruokala/kassa', { tuotteet})
+}))
+
+app.get('/ruokala/uusi', (req, res) => {
+    res.render('ruokala/uusi')
+ 
+ })
+ //takaisin tulevat commentit pitää parse:ta
+ app.post('/ruokala', validoiRuoka, catchAsync( async (req, res) => {
+    // console.log(req.body)
+    const ruoka = new Ruoka(req.body.ruokala)
+    await ruoka.save()
+    res.redirect('/kassa')
+ }))
+
+ app.delete('/ruokala/:id', catchAsync(async (req, res) => {
+    const { id } = req.params
+    await Ruoka.findByIdAndDelete(id)
+    res.redirect('/kassa')
+}))
+
+
+//kun mikään aiempi sivu ei natsannut, tulee, sivua ei löydy
+app.all('*', (req, res, next) => {
+    //next työntää sen tohon alempaan error handleriin
+    next(new ExpressError('Sivua ei löytynyt!', 404))
+})
+
+//error..perus erroreita, ettei serveri kaadu, löytyy utils
+app.use((err, req, res ,next) => {
+    const {statusCode = 500} =  err 
+    if(!err.message) err.message = 'Jotain meni pieleen'
+    res.status(statusCode).render('error', {err})
 })
 
 app.listen(3000, () => {
