@@ -5,21 +5,21 @@
 <h1>Lisää uusi tuote</h1>
         <form action="/ruokala" method="post" novalidate class="validoi-tämä">
             <div class="mb-3">
-                <label for="ruuannimi">ruuan nimi:</label>
+                <label class="form-label" for="ruuannimi">ruuan nimi:</label>
                 <input class="form-control" type="text" id="ruuannimi" name="ruokala[nimi]" required>
                 <div class="invalid-feedback">
                     Tämä kenttä pitää täyttää
                   </div>
             </div>
             <div>
-                <label for="hinta">Hinta:</label>
+                <label class="form-label" for="hinta">Hinta:</label>
                 <input class="form-control" type="number" id="hinta" name="ruokala[hinta]" required>
                 <div class="invalid-feedback">
                     Tämä kenttä pitää täyttää
                   </div>
             </div>
             <div>
-                <label for="annos">Montako annosta:</label>
+                <label class="form-label" for="annos">Montako annosta:</label>
                 <input class="form-control" type="number" id="annos" name="ruokala[määrä]" required>
                 <div class="invalid-feedback">
                     Tämä kenttä pitää täyttää

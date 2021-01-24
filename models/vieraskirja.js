@@ -8,8 +8,14 @@ const VieraskirjaSchema = new Schema({
     koska: {
         type: Date,
         default: Date.now
-
-}})
+    },
+    kommentit: [
+        {
+           type: Schema.Types.ObjectId,
+            ref: 'Kommentti'
+        }
+    ]
+})
 
 //exportattaan pohjapiirustus 'Vieraskirja' nimella
 module.exports = mongoose.model('Vieraskirja', VieraskirjaSchema)

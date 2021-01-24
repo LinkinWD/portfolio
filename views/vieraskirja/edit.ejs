@@ -2,14 +2,14 @@
 
 <h1>Kirjoitus</h1>
     <!-- käytetään overrideä -->
-    <form action="/vieraskirja/<%= kommentti._id %>?_method=PUT" method="post" novalidate class="validoi-tämä">
+    <form action="/vieraskirja/<%= tervehdys._id %>?_method=PUT" method="post" novalidate class="validoi-tämä">
     <div>
-        <label for="kirjoittaja"> <%=kommentti.kirjoittaja%></label>
-        <input type="text" class="form-control" id="kirjoittaja" value="<%=kommentti.kirjoittaja%>"  name="vieraskirja[kirjoittaja]" required>
+        <label class="form-label" for="kirjoittaja"> <%=tervehdys.kirjoittaja%></label>
+        <input type="text" class="form-control" id="kirjoittaja" value="<%=tervehdys.kirjoittaja%>"  name="vieraskirja[kirjoittaja]" required>
     </div>
     <div>
-        <label for="kommentti">Kommentti:</label>
-        <input class="form-control" type="text" id="kommentti" name="vieraskirja[kommentti]" value="<%=kommentti.kommentti%>" required>
+        <label class="form-label" for="kommentti">Kommentti:</label>
+        <input class="form-control" type="text" id="kommentti" name="vieraskirja[kommentti]" value="<%=tervehdys.kommentti%>" required>
         <div class="invalid-feedback">
             Tämä pitää olla sisältöä
           </div>
@@ -19,6 +19,6 @@
 
     <a class="btn btn-primary" href="/vieraskirja">Palaa takaisin</a>
 </form>
-<form action="/vieraskirja/<%= kommentti._id %>?_method=DELETE" method="POST">
+<form action="/vieraskirja/<%= tervehdys._id %>?_method=DELETE" method="POST">
     <button class="btn btn-danger">Poista kommentti</button>
     </form>

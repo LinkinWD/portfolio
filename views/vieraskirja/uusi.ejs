@@ -5,14 +5,14 @@
 <h1>Lisää uusi tuote</h1>
         <form action="/vieraskirja" method="post" novalidate class="validoi-tämä">
             <div class="mb-3">
-                <label for="kirjoittaja">Keneltä:</label>
+                <label class="form-label" for="kirjoittaja">Keneltä:</label>
                 <input class="form-control" type="text" id="kirjoittaja" name="vieraskirja[kirjoittaja]" required>
                 <div class="invalid-feedback">
                     Tämä kenttä pitää täyttää
                   </div>
             </div>
             <div>
-                <label for="kommentti">kommentti:</label>
+                <label class="form-label" for="kommentti">kommentti:</label>
                 <input class="form-control" type="text" id="kommentti" name="vieraskirja[kommentti]" required>
                 <div class="invalid-feedback">
                     Tämä kenttä pitää täyttää

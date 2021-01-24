@@ -5,12 +5,13 @@ const mongoose = require('mongoose')
 const ejsMate = require('ejs-mate')
 const Vieraskirja = require('./models/vieraskirja')
 const Ruoka = require('./models/ruoka')
+const Kommentti = require('./models/kommentit')
 
 
 //errorit ja validointi
 const catchAsync = require('./utils/catchAsync')
 const ExpressError = require('./utils/expressError')
-const { vieraskirjaSchema, ruokaSchema} = require('./schemas.js')
+const { vieraskirjaSchema, ruokaSchema, kommentitSchema} = require('./schemas.js')
 
 const validoiVieraskirja = (req, res, next) => {
 // tämä on joi schema, ei mongoose. Se validoi ne nimet, mitkä löytyy [sisältä] inputista. Itse koodi on schemas.js
@@ -23,6 +24,15 @@ if(error) {
 }}
 const validoiRuoka =(req, res, next) => {
     const { error} = ruokaSchema.validate(req.body)
+    if(error) {
+        const msg = error.details.map(el => el.message).join(',')
+        throw new ExpressError(msg, 400)
+    } else {
+        next()
+    }    
+}
+const validoiKommentti =(req, res, next) => {
+    const { error} = kommentitSchema.validate(req.body)
     if(error) {
         const msg = error.details.map(el => el.message).join(',')
         throw new ExpressError(msg, 400)
@@ -79,16 +89,16 @@ app.get('/vieraskirja/uusi', (req, res) => {
 //takaisin tulevat commentit pitää parse:ta
 app.post('/vieraskirja', validoiVieraskirja, catchAsync(async (req, res) => {
    // console.log(req.body) 
-   const kommentti = new Vieraskirja(req.body.vieraskirja)
-   await kommentti.save()
+   const tervehdys = new Vieraskirja(req.body.vieraskirja)
+   await tervehdys.save()
    res.redirect('vieraskirja')
 }))
 
 app.get('/vieraskirja/:id/edit', catchAsync(async(req, res) => {
     //etsitää id:llä vieraskirjasta
-    const kommentti = await Vieraskirja.findById(req.params.id)
+    const tervehdys = await Vieraskirja.findById(req.params.id)
     // console.log(req.params.id)
-    res.render('vieraskirja/edit', { kommentti })
+    res.render('vieraskirja/edit', { tervehdys })
 }))
 
 app.put('/vieraskirja/:id', validoiVieraskirja, catchAsync(async(req, res) => {
@@ -103,6 +113,19 @@ app.put('/vieraskirja/:id', validoiVieraskirja, catchAsync(async(req, res) => {
 app.delete('/vieraskirja/:id', catchAsync(async(req, res) => {
     const { id } = req.params
     await Vieraskirja.findByIdAndDelete(id)
+    res.redirect('/vieraskirja')
+}))
+
+app.post('/vieraskirja/:id/kommentit', validoiKommentti, catchAsync(async(req, res) => {
+    //etsitään oikea merkintä vieraskirjasta
+    const vieraskirja = await Vieraskirja.findById(req.params.id)
+    //tehdään uusi kommentti
+    const kommentti = new Kommentti(req.body.kommentit)
+    //työnnetään kommentti oikeaan kohtaan vieraskirjassa
+    vieraskirja.kommentit.push(kommentti)
+    //tallenetaan kummatkin
+    await kommentti.save()
+    await vieraskirja.save()
     res.redirect('/vieraskirja')
 }))
 

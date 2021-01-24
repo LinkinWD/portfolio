@@ -16,6 +16,12 @@ module.exports.ruokaSchema = Joi.object({
     }).required()
 })
 
+module.exports.kommentitSchema = Joi.object({
+    kommentit: Joi.object({
+        kirjoittaja: Joi.string().required(),
+        kommentti: Joi.string().required()
+    }).required()
+})
 
 
 
