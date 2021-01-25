@@ -1,6 +1,9 @@
 const mongoose = require('mongoose')
 //lyhenne scheemaan
 const Schema = mongoose.Schema
+// tarvitaan että kommentit saa myös poistettua samalla, kun poistaa vieraskirja merkinnän
+const Kommentti = require ('./kommentit')
+
 
 const VieraskirjaSchema = new Schema({
     kirjoittaja: String,
@@ -15,6 +18,21 @@ const VieraskirjaSchema = new Schema({
             ref: 'Kommentti'
         }
     ]
+})
+//MIDDLEWARE
+//deletoitu, mutta menee vielä middlewareen
+VieraskirjaSchema.post('findOneAndDelete', async function(doc) {
+   // console.log(doc)
+   //jos jotain löytyi ja poistettiin
+   if(doc) {
+       //poistetaan kaikki kommentit jos niiden _id on jossain tämän vieraskinrjamerkinnän sisällä
+       await Kommentti.remove({
+           _id: {
+               $in: doc.kommentit
+           }
+
+       }) 
+   }
 })
 
 //exportattaan pohjapiirustus 'Vieraskirja' nimella
