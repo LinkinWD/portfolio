@@ -1,10 +1,12 @@
 <% layout('/layouts/boilerplate') %> 
     <h1>Vieraskirja</h1>
     <p>Tervetuloa vieraskirjaan</p>
-    <a class="btn btn-primary" href="/vieraskirja/uusi">Uusi kommentti</a>
+    <a class="btn btn-primary mb-4" href="/vieraskirja/uusi">Jätä tervehdys</a>
         <% for(merkintä of vieraskirja) { %>
-            <div class="card mb-3">
+            
                 <div class="row">
+                  <div class="col-6">
+                  <div class="card mb-1">
                 <div class="card-body col-md-3">
                   <h5 class="card-title"><%= merkintä.kirjoittaja %> </h5>
                   <p class="card-text text-muted"><%= merkintä.koska %> </p>
@@ -14,39 +16,48 @@
                 </div>
                   <div class="card-body col-md-3">
                   <a href="/vieraskirja/<%= merkintä._id %>/edit" class="btn btn-primary">Muokkaa tai poista</a>
-                 
                 </div>
                 </div>
-               
-                  
+                </div>
+             
+              <!--  kommentit -->
+                 <div class="col-6">
                   <% for (kommentti of merkintä.kommentit) { %>
+                    <div class="card">
+                      <div class="card-body">
                   <p><%= kommentti.kirjoittaja %> </p>
                   <p><%= kommentti.kommentti %> </p> 
+                  <form action="/vieraskirja/<%=merkintä._id%>/kommentit/<%=kommentti._id%>?_method=DELETE" method="POST">
+                    <button class="btn btn-sm btn-danger">Poista</button>
+                  </form>
+                </div>
+              </div>
                   <% } %> 
-               
+                </div> 
               </div>
               </div>
               <div>
-                
+                  <!--  jätä kommentti -->
+               <h5>kommentoi</h5>
+               <form action="/vieraskirja/<%=merkintä._id%>/kommentit" method="POST" novalidate class="validoi-tämä">
+                 <div class="mb-1">
+                   <label class="form-label" for="kirjoittaja">Kommentoija</label>
+                   <input type="text" id="kirjoittaja" class="form-control" name="kommentit[kirjoittaja]" required>
+                   <div class="invalid-feedback">
+                     Tässä pitää olla sisältöä
+                   </div>
+                 </div>
+                 <div class="mb-1">
+                   <label for="kommentti" class="form-label">Kommenttisi</label>
+                   <textarea class="form-control"  name="kommentit[kommentti]" id="kommentti" cols="30" rows="5" required></textarea>
+                   <div class="invalid-feedback">
+                     Tässä pitää olla sisältöä
+                   </div>
+                 </div>
+                 <button class="btn btn-success mb-4">Lähetä</button>
+               </form>
       
-              <h3>Jätä kommentti</h3>
-              <form action="/vieraskirja/<%=merkintä._id%>/kommentit" method="POST" novalidate class="validoi-tämä">
-                <div class="mb-1">
-                  <label class="form-label" for="kirjoittaja">Kommentoija</label>
-                  <input type="text" id="kirjoittaja" class="form-control" name="kommentit[kirjoittaja]" required>
-                  <div class="invalid-feedback">
-                    Tässä pitää olla sisältöä
-                  </div>
-                </div>
-                <div class="mb-1">
-                  <label for="kommentti" class="form-label">Kommenttisi</label>
-                  <textarea class="form-control"  name="kommentit[kommentti]" id="kommentti" cols="30" rows="5" required></textarea>
-                  <div class="invalid-feedback">
-                    Tässä pitää olla sisältöä
-                  </div>
-                </div>
-                <button class="btn btn-success mb-4">Lähetä</button>
-              </form>
+             
         <% } %>
         
        

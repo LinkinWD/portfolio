@@ -129,6 +129,15 @@ app.post('/vieraskirja/:id/kommentit', validoiKommentti, catchAsync(async(req, r
     res.redirect('/vieraskirja')
 }))
 
+app.delete('/vieraskirja/:id/kommentit/:kommenttiId', catchAsync(async(req, res) => {
+    const { id, kommenttiId} = req.params
+    //pull, vedetään vieraskirjasta kommentti, jolla on kommentti id
+    await Vieraskirja.findByIdAndUpdate(id, { $pull: { kommentit: kommenttiId } } )
+    //etsitään kommentti ja poistetaan
+    await Kommentti.findByIdAndDelete(kommenttiId)
+    res.redirect('/vieraskirja')
+}))
+
 app.get('/ruokala', catchAsync(async(req, res) => {
     const tuotteet = await Ruoka.find({})
     // console.log(tuotteet)
