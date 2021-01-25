@@ -4,9 +4,15 @@
 <h1>Myynyssä olevat tuotteeet</h1>
 
 <ul>
-    <li>Tuote:    Määrä:    Hinta:</li>
+    
 <% for(tuote of tuotteet) { %> 
     <li><%= tuote.nimi %> : <%= tuote.määrä %> annosta: <%= tuote.hinta %> €  </li>
+</form>
+<form action="">
+    <input type="range" value="<%= tuote.määrä %>" min="1" max="20" oninput="this.nextElementSibling.value = this.value" name="ruokala[määrä]" class="form-control">
+<output><%= tuote.määrä %></output>
+<button class="btn btn-primary">muuta</button>
+
 </form>
 <form action="/ruokala/<%= tuote._id %>?_method=DELETE" method="POST">
     <button class="btn btn-danger">Poista tuote</button>
@@ -15,3 +21,7 @@
 </ul>
 
 <a class="btn btn-success" href="/ruokala/uusi">Lisää ruoka myyntiin</a>
+
+
+<script src="javascripts/bootstrap.bundle.js"></script>
+<script src="javascripts/kassa.js"></script>
