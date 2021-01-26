@@ -1,21 +1,24 @@
+require('dotenv').config()
 const express = require('express')
 const methodOverride = require ('method-override')
 const path = require('path')
 const mongoose = require('mongoose')
 const ejsMate = require('ejs-mate')
-const Vieraskirja = require('./models/vieraskirja')
 const Ruoka = require('./models/ruoka')
-const Kommentti = require('./models/kommentit')
+const session = require('express-session')
+const cookies = require('cookie-parser')
 
+
+//reitti vakiot
 const vieraskirjanReitit = require('./routes/vieraskirja')
 const kommenttiReitit = require('./routes/kommentit')
 const ruokalanReitit = require('./routes/ruokala')
 
+
+
 //errorit ja validointi
 const catchAsync = require('./utils/catchAsync')
 const ExpressError = require('./utils/expressError')
-const { vieraskirjaSchema, ruokaSchema, kommentitSchema} = require('./schemas.js')
-
 
 
 
@@ -23,7 +26,8 @@ const { vieraskirjaSchema, ruokaSchema, kommentitSchema} = require('./schemas.js
 mongoose.connect('mongodb://localhost:27017/portfolio', {
     useNewUrlParser: true,
     useCreateIndex: true,
-    useUnifiedTopology: true
+    useUnifiedTopology: true,
+    useFindAndModify: false
     
 })
 const db = mongoose.connection
@@ -42,10 +46,25 @@ app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'ejs')
 app.use(express.static(path.join(__dirname, 'public')))
 
+const sessionConfig = {
+    secret: process.env.SECRET,
+    resave: false,
+    saveUninitialized: true,
+    cookie: {
+        httpOnly: true,
+        //millisekunnit * sekunnit * minuutit * tunnit
+        expires: Date.now() + 1000 * 60 * 60 * 3,
+        maxAge: 1000 * 60 * 60 * 3
+    }
+}
+app.use(session(sessionConfig))
+
 
 //parse jutska ja asetetaan method-overrriden tunnus
 app.use(express.urlencoded({ extended: true}) )
 app.use(methodOverride('_method'))
+
+
 
 //reitit
 app.use('/vieraskirja', vieraskirjanReitit)
