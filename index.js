@@ -8,12 +8,16 @@ const Ruoka = require('./models/ruoka')
 const session = require('express-session')
 const cookies = require('cookie-parser')
 const flash = require('connect-flash')
+const passport = require('passport')
+const LocalSctrategy = require('passport-local')
+const Käyttäjä = require('./models/käyttäjät')
 
 
 //reitti vakiot
 const vieraskirjanReitit = require('./routes/vieraskirja')
 const kommenttiReitit = require('./routes/kommentit')
 const ruokalanReitit = require('./routes/ruokala')
+const käyttäjäReitit = require('./routes/käyttäjät')
 
 
 
@@ -63,6 +67,14 @@ const sessionConfig = {
 app.use(session(sessionConfig))
 app.use(flash())
 
+//Passport(Session pitää olla ennen tätä)
+app.use(passport.initialize())
+app.use(passport.session())
+passport.use(new LocalSctrategy(Käyttäjä.authenticate()))
+//liittyy käyttäjää sessiossa ja sen jälkeen
+passport.serializeUser(Käyttäjä.serializeUser())
+passport.deserializeUser(Käyttäjä.deserializeUser())
+
 //parse jutska ja asetetaan method-overrriden tunnus
 app.use(express.urlencoded({ extended: true}) )
 app.use(methodOverride('_method'))
@@ -75,6 +87,7 @@ app.use((req, res, next) => {
 })
 
 //reitit
+app.use('/', käyttäjäReitit)
 app.use('/vieraskirja', vieraskirjanReitit)
 app.use('/vieraskirja/:id/kommentit', kommenttiReitit)
 app.use('/ruokala', ruokalanReitit)
@@ -83,7 +96,12 @@ app.get('/', (req, res) => {
     res.render('home')
 })
 
-
+/* tee harjoitus admin
+app.get('/fakeuser', async(req, res) => {
+    const user = new Käyttäjä({email: 'admin@gmail.com', username: 'admin', admin: true})
+    const uusiKäyttäjä = await Käyttäjä.register(user, 'apina')
+    res.send(uusiKäyttäjä)
+}) */
 
 app.get('/kassa', catchAsync(async(req, res) => {
     const tuotteet = await Ruoka.find({})
