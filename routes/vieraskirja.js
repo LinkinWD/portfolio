@@ -35,12 +35,18 @@ router.post('/', validoiVieraskirja, catchAsync(async (req, res) => {
    // console.log(req.body) 
    const tervehdys = new Vieraskirja(req.body.vieraskirja)
    await tervehdys.save()
+   req.flash('onnistu', 'Teit onnistuneesti uuden kirjoituksen')
    res.redirect('vieraskirja')
 }))
 
 router.get('/:id/edit', catchAsync(async(req, res) => {
     //etsitää id:llä vieraskirjasta
     const tervehdys = await Vieraskirja.findById(req.params.id)
+    // jos yrittää editoida jotain mitä ei enään ole olemassakaaan
+    if(!tervehdys) {
+        req.flash('error', 'Viestiä ei löydy')
+        return res.redirect('/vieraskirja')
+    }
     // console.log(req.params.id)
     res.render('vieraskirja/edit', { tervehdys })
 }))
@@ -50,6 +56,7 @@ router.put('/:id', validoiVieraskirja, catchAsync(async(req, res) => {
     const { id } = req.params
     // console.log(req.params)
     const kommentti = await Vieraskirja.findByIdAndUpdate(id, {...req.body.vieraskirja})
+    req.flash('onnistu', 'päivitit onnistuneesti viestisi')
     // console.log(kommentti)
     res.redirect(`/vieraskirja`)
 }))
@@ -57,6 +64,7 @@ router.put('/:id', validoiVieraskirja, catchAsync(async(req, res) => {
 router.delete('/:id', catchAsync(async(req, res) => {
     const { id } = req.params
     await Vieraskirja.findByIdAndDelete(id)
+    req.flash('onnistu', 'Viesti poistettu :(')
     res.redirect('/vieraskirja')
 }))
 

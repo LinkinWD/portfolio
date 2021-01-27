@@ -1,0 +1,8 @@
+
+<!-- koska onnistu on array, pitää myös katsoa, että onko sillä pituutta, ettei tule turhaa vihreää boksia joka sivulle -->
+<% if(onnistu && onnistu.length) {  %> 
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+    <%= onnistu %> 
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+<% } %> 

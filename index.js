@@ -7,6 +7,7 @@ const ejsMate = require('ejs-mate')
 const Ruoka = require('./models/ruoka')
 const session = require('express-session')
 const cookies = require('cookie-parser')
+const flash = require('connect-flash')
 
 
 //reitti vakiot
@@ -46,6 +47,8 @@ app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'ejs')
 app.use(express.static(path.join(__dirname, 'public')))
 
+
+//sessionit ja flash viestit
 const sessionConfig = {
     secret: process.env.SECRET,
     resave: false,
@@ -58,13 +61,18 @@ const sessionConfig = {
     }
 }
 app.use(session(sessionConfig))
-
+app.use(flash())
 
 //parse jutska ja asetetaan method-overrriden tunnus
 app.use(express.urlencoded({ extended: true}) )
 app.use(methodOverride('_method'))
 
-
+//Tämä tulee olla ennen reittejä, local variables(oiskohan ne suomeksi paikalliset muuttujat :D ). Näihin pääsee kaikissa templateissa käsiksi vaikkei niitä lähetäkkään sinne. 
+app.use((req, res, next) => {
+    res.locals.onnistu = req.flash('onnistu')
+    res.locals.error = req.flash('error')
+    next()
+})
 
 //reitit
 app.use('/vieraskirja', vieraskirjanReitit)

@@ -29,6 +29,7 @@ router.post('/', validoiKommentti, catchAsync(async(req, res) => {
     //tallenetaan kummatkin
     await kommentti.save()
     await vieraskirja.save()
+    req.flash('onnistu', 'teit onnistuneesti uuden kommentin')
     res.redirect('/vieraskirja')
 }))
 
@@ -38,6 +39,7 @@ router.delete('/:kommenttiId', catchAsync(async(req, res) => {
     await Vieraskirja.findByIdAndUpdate(id, { $pull: { kommentit: kommenttiId } } )
     //etsitään kommentti ja poistetaan
     await Kommentti.findByIdAndDelete(kommenttiId)
+    req.flash('onnistu', 'kommentti poistettu')
     res.redirect('/vieraskirja')
 }))
 
