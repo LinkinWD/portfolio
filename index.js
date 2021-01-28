@@ -83,6 +83,9 @@ app.use(methodOverride('_method'))
 app.use((req, res, next) => {
     res.locals.onnistu = req.flash('onnistu')
     res.locals.error = req.flash('error')
+    //passport thinggie
+    // console.log(req.user)
+    res.locals.käyttäjä = req.user
     next()
 })
 

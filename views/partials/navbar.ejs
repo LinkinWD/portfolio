@@ -11,6 +11,15 @@
           <a class="nav-link" href="/ruokala">Ruokala</a>
           <a class="nav-link"  href="/kassa">Kassa</a>
         </div>
+        <!-- En tiedä miksi se on ms-auto vieläkään, eikä mr-auto :D -->
+        <div class="navbar-nav ms-auto">
+          <% if(!käyttäjä) { %> 
+          <a class="nav-link" href="/login">Kirjaudu sisään</a>
+          <a class="nav-link"  href="/register">Rekisteröidy</a>
+          <% } else { %>
+            <a class="nav-link" href="/logout">Kirjaudu ulos</a> 
+          <% } %> 
+        </div>
       </div>
     </div>
   </nav>
