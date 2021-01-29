@@ -8,15 +8,20 @@
                   <div class="col-6">
                   <div class="card mb-1">
                 <div class="card-body col-md-3">
-                  <h5 class="card-title"><%= merkintä.kirjoittaja %> </h5>
+                  <h5 class="card-title"><%= merkintä.otsikko %> </h5>
                   <p class="card-text text-muted"><%= merkintä.koska %> </p>
+                  <p class="card-text">Luoja: <%= merkintä.luoja.username %> </p>
+
                 </div>
                 <div class="card-body col-md-6">
                   <p class="card-text"><%= merkintä.kommentti %> </p>
                 </div>
-                  <div class="card-body col-md-3">
+                <!-- Jos local.käyttäjä on sama kuin merkinnän tekijä niin silloin näkyy, katso index.js, käyttäjä = passportin user -->
+                <% if(käyttäjä && merkintä.luoja.equals(käyttäjä._id)) {%> 
+                <div class="card-body col-md-3">
                   <a href="/vieraskirja/<%= merkintä._id %>/edit" class="btn btn-primary">Muokkaa tai poista</a>
                 </div>
+                <% } %> 
                 </div>
                 </div>
              

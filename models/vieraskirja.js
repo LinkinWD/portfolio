@@ -15,7 +15,7 @@ const VieraskirjaSchema = new Schema({
     luoja: 
          {
         type: Schema.Types.ObjectId,
-        ref: 'käyttäjä'
+        ref: 'Käyttäjä'
          },
     //Liitetään kommentit
     kommentit: [
