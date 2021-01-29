@@ -7,7 +7,8 @@ const { onKirjautunut } = require('../middleware')
 //errorit ja validointi
 const catchAsync = require('../utils/catchAsync')
 const ExpressError = require('../utils/expressError')
-const { vieraskirjaSchema} = require('../schemas.js')
+const { vieraskirjaSchema } = require('../schemas.js')
+const vieraskirja = require('../models/vieraskirja')
 
 
 const validoiVieraskirja = (req, res, next) => {
@@ -24,20 +25,24 @@ const validoiVieraskirja = (req, res, next) => {
 router.get('/',  catchAsync(async(req, res) => {
     //async functio, että voidaan odottaa, kun tiedot haetaa tietokannasta. Populatea kommentteihin, koska ne on osana vieraskirjaa ja liitetty sen pohjappiirustukseen
     const vieraskirja = await Vieraskirja.find({}).populate('kommentit')
-    // console.log(vieraskirja)
+    
+    console.log(vieraskirja)
     //näytetään index sivu ja lähetetään 'vieraskirjan' tiedot databasesta
     res.render('vieraskirja/index', {vieraskirja})
 }))
 
-router.get('/uusi', onKirjautunut, (req, res) => {
+router.get('/uusi', onKirjautunut, catchAsync(async (req, res) => {
    
    res.render('vieraskirja/uusi')
 
-})
+}))
 //takaisin tulevat commentit pitää parse:ta
 router.post('/' ,validoiVieraskirja, onKirjautunut, catchAsync(async (req, res) => {
    // console.log(req.body) 
+
    const tervehdys = new Vieraskirja(req.body.vieraskirja)
+   //Muista tää saatanan luoja liittää tähän :D
+   tervehdys.luoja = req.user._id
    await tervehdys.save()
    req.flash('onnistu', 'Teit onnistuneesti uuden kirjoituksen')
    res.redirect('vieraskirja')
@@ -45,7 +50,8 @@ router.post('/' ,validoiVieraskirja, onKirjautunut, catchAsync(async (req, res) 
 
 router.get('/:id/edit', onKirjautunut, catchAsync(async(req, res) => {
     //etsitää id:llä vieraskirjasta
-    const tervehdys = await Vieraskirja.findById(req.params.id)
+    const tervehdys = await Vieraskirja.findById(req.params.id).populate('luoja')
+    
     // jos yrittää editoida jotain mitä ei enään ole olemassakaaan
     if(!tervehdys) {
         req.flash('error', 'Viestiä ei löydy')

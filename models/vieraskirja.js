@@ -4,14 +4,20 @@ const Schema = mongoose.Schema
 // tarvitaan että kommentit saa myös poistettua samalla, kun poistaa vieraskirja merkinnän
 const Kommentti = require ('./kommentit')
 
-
 const VieraskirjaSchema = new Schema({
-    kirjoittaja: String,
+    otsikko: String,
     kommentti: String,
-    koska: {
+    koska:
+     {
         type: Date,
         default: Date.now
     },
+    luoja: 
+         {
+        type: Schema.Types.ObjectId,
+        ref: 'käyttäjä'
+         },
+    //Liitetään kommentit
     kommentit: [
         {
            type: Schema.Types.ObjectId,
@@ -19,6 +25,7 @@ const VieraskirjaSchema = new Schema({
         }
     ]
 })
+
 //MIDDLEWARE
 //deletoitu, mutta menee vielä middlewareen
 VieraskirjaSchema.post('findOneAndDelete', async function(doc) {
@@ -32,8 +39,11 @@ VieraskirjaSchema.post('findOneAndDelete', async function(doc) {
            }
 
        }) 
-   }
-})
+       
+
+    }} )
+   
+
 
 //exportattaan pohjapiirustus 'Vieraskirja' nimella
 module.exports = mongoose.model('Vieraskirja', VieraskirjaSchema)

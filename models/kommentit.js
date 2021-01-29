@@ -3,7 +3,7 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 const KommenttiSchema = new Schema({
-    kirjoittaja: String,
+   
     kommentti: String,
     })
 

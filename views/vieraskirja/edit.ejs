@@ -4,8 +4,8 @@
     <!-- käytetään overrideä -->
     <form action="/vieraskirja/<%= tervehdys._id %>?_method=PUT" method="post" novalidate class="validoi-tämä">
     <div>
-        <label class="form-label" for="kirjoittaja"> <%=tervehdys.kirjoittaja%></label>
-        <input type="text" class="form-control" id="kirjoittaja" value="<%=tervehdys.kirjoittaja%>"  name="vieraskirja[kirjoittaja]" required>
+        <label class="form-label" for="otsikko"> <%=tervehdys.otsikko%></label>
+        <input type="text" class="form-control" id="otsikko" value="<%=tervehdys.otsikko%>"  name="vieraskirja[otsikko]" required>
     </div>
     <div>
         <label class="form-label" for="kommentti">Kommentti:</label>

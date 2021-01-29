@@ -12,20 +12,15 @@ const passport = require('passport')
 const LocalSctrategy = require('passport-local')
 const Käyttäjä = require('./models/käyttäjät')
 
-
 //reitti vakiot
 const vieraskirjanReitit = require('./routes/vieraskirja')
 const kommenttiReitit = require('./routes/kommentit')
 const ruokalanReitit = require('./routes/ruokala')
 const käyttäjäReitit = require('./routes/käyttäjät')
 
-
-
 //errorit ja validointi
 const catchAsync = require('./utils/catchAsync')
 const ExpressError = require('./utils/expressError')
-
-
 
 //Yhdistetään tietokantaan
 mongoose.connect('mongodb://localhost:27017/portfolio', {
@@ -41,16 +36,13 @@ db.once('open', () => {
     console.log('Yhteys tietokantaa avattu')
 })
 
-
 const app = express()
 
 app.engine('ejs', ejsMate )
-
 //Esetetaan ejs view engineksi ja sen path
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'ejs')
 app.use(express.static(path.join(__dirname, 'public')))
-
 
 //sessionit ja flash viestit
 const sessionConfig = {
@@ -110,8 +102,6 @@ app.get('/kassa', catchAsync(async(req, res) => {
     const tuotteet = await Ruoka.find({})
     res.render('ruokala/kassa', { tuotteet})
 }))
-
-
 
 //kun mikään aiempi sivu ei natsannut, tulee, sivua ei löydy
 app.all('*', (req, res, next) => {

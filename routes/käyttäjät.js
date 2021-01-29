@@ -1,6 +1,5 @@
 const express = require('express')
 const passport = require('passport')
-const käyttäjät = require('../models/käyttäjät')
 const router = express.Router()
 const Käyttäjä = require ('../models/käyttäjät')
 const catchAsync = require('../utils/catchAsync')
@@ -15,6 +14,7 @@ router.post('/register', catchAsync(async(req, res, next) =>{
     const { email, username, password } = req.body
     const uusiKäyttäjä = new Käyttäjä({ email, username})
     const registöröityKäyttäja = await Käyttäjä.register(uusiKäyttäjä, password) 
+    console.log(registöröityKäyttäja)
     //logattaan uusi käyttäjä sisään
     req.login(registöröityKäyttäja, err => {
         if(err) return next(err)
@@ -37,7 +37,7 @@ router.post('/login', passport.authenticate('local', {
     failureRedirect: '/login'
 }), (req, res) => {
     req.flash('onnistu', 'Tervetuloa takasin')
-    const redirectUrl = req.session.returnTo || '/'
+    const redirectUrl = req.session.returnTo || '/vieraskirja'
     delete req.session.returnTo
     res.redirect(redirectUrl)
 

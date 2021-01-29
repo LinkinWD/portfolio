@@ -3,7 +3,7 @@ const Joi = require('joi')
 
 module.exports.vieraskirjaSchema = Joi.object({
     vieraskirja: Joi.object ({
-        kirjoittaja: Joi.string().required(),
+        otsikko: Joi.string().required(),
         kommentti: Joi.string().required()
     }).required()
 })
@@ -18,7 +18,7 @@ module.exports.ruokaSchema = Joi.object({
 
 module.exports.kommentitSchema = Joi.object({
     kommentit: Joi.object({
-        kirjoittaja: Joi.string().required(),
+        
         kommentti: Joi.string().required()
     }).required()
 })
