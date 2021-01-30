@@ -28,13 +28,10 @@ module.exports.onLuoja = async (req,res, next) => {
 }
 
 module.exports.onAdmin = async (req,res, next) => {
-    //otetaan ID urlista
-    const { id } = req.params
-    const käyttäjä = await Käyttäjä.findById(id)
-    if(!req.user.admin === true) {
-        req.flash('error', 'Sinulla ei ole oikeuksi tähän')
-        //muista return middlewareissa, next jutskissa
-        return  res.redirect('/vieraskirja')
+    // console.log(req.user)
+    if(!req.user || req.user.admin === false){
+        req.flash('error', 'Sinulla ei ole toimivaltuuksia tähän')
+        return res.redirect('/ruokala')
     }
     next()
 

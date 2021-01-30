@@ -25,8 +25,3 @@ module.exports.uusiRuokaFormi = (req, res) => {
     res.redirect('/kassa')
 }
 
-module.exports.kassa = async (req, res) => {
-    const tuotteet = await Ruoka.find({})
-    res.render('ruokala/kassa', { tuotteet})
-}
-

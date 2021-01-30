@@ -18,7 +18,7 @@ router.get('/uusi', ruokala.uusiRuokaFormi)
 
  router.delete('/:id', onKirjautunut, catchAsync(ruokala.poistaRuokaMyynistä))
 
- router.get('/kassa', catchAsync(ruokala.kassa))
+ 
 
 
 module.exports = router
