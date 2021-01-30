@@ -1,48 +1,24 @@
 const express = require('express')
 //houmaa merge params
 const router = express.Router()
-const Ruoka = require('../models/ruoka')
-
+const ruokala = require('../controllers/ruokala')
 
 //errorit ja validointi
 const catchAsync = require('../utils/catchAsync')
-const ExpressError = require('../utils/expressError')
-const { ruokaSchema} = require('../schemas.js')
-
-const validoiRuoka =(req, res, next) => {
-    const { error} = ruokaSchema.validate(req.body)
-    if(error) {
-        const msg = error.details.map(el => el.message).join(',')
-        throw new ExpressError(msg, 400)
-    } else {
-        next()
-    }    
-}
+const {onKirjautunut, validoiRuoka} = require('../middleware')
 
 
 
-router.get('/', catchAsync(async(req, res) => {
-    const tuotteet = await Ruoka.find({})
-    // console.log(tuotteet)
-    res.render('ruokala/index', {tuotteet})
-})) 
 
-router.get('/uusi', (req, res) => {
-    res.render('ruokala/uusi')
- 
- })
- //takaisin tulevat commentit pitää parse:ta
- router.post('/', validoiRuoka, catchAsync( async (req, res) => {
-    // console.log(req.body)
-    const ruoka = new Ruoka(req.body.ruokala)
-    await ruoka.save()
-    res.redirect('/kassa')
- }))
+router.get('/', catchAsync(ruokala.index)) 
 
- router.delete('/:id', catchAsync(async (req, res) => {
-    const { id } = req.params
-    await Ruoka.findByIdAndDelete(id)
-    res.redirect('/kassa')
-}))
+router.get('/uusi', ruokala.uusiRuokaFormi)
+
+ router.post('/' ,validoiRuoka, catchAsync(ruokala.luoUusiRuokaMyyntiin))
+
+ router.delete('/:id', onKirjautunut, catchAsync(ruokala.poistaRuokaMyynistä))
+
+ router.get('/kassa', catchAsync(ruokala.kassa))
+
 
 module.exports = router

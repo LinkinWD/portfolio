@@ -91,17 +91,13 @@ app.get('/', (req, res) => {
     res.render('home')
 })
 
-/* tee harjoitus admin
+/* harjoitus admin
 app.get('/fakeuser', async(req, res) => {
     const user = new Käyttäjä({email: 'admin@gmail.com', username: 'admin', admin: true})
     const uusiKäyttäjä = await Käyttäjä.register(user, 'apina')
     res.send(uusiKäyttäjä)
 }) */
 
-app.get('/kassa', catchAsync(async(req, res) => {
-    const tuotteet = await Ruoka.find({})
-    res.render('ruokala/kassa', { tuotteet})
-}))
 
 //kun mikään aiempi sivu ei natsannut, tulee, sivua ei löydy
 app.all('*', (req, res, next) => {

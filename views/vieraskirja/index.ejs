@@ -24,17 +24,19 @@
                 <% } %> 
                 </div>
                 </div>
-             
+                          
               <!--  kommentit -->
                  <div class="col-6">
                   <% for (kommentti of merkintä.kommentit) { %>
                     <div class="card">
                       <div class="card-body">
-                  <p><%= kommentti.kirjoittaja %> </p>
+                  <p><%= kommentti.luoja.username %> </p>
                   <p><%= kommentti.kommentti %> </p> 
+                  <% if(käyttäjä && merkintä.luoja.equals(käyttäjä._id)) {%>
                   <form action="/vieraskirja/<%=merkintä._id%>/kommentit/<%=kommentti._id%>?_method=DELETE" method="POST">
                     <button class="btn btn-sm btn-danger">Poista</button>
                   </form>
+                   <% } %> 
                 </div>
               </div>
                   <% } %> 
@@ -42,6 +44,8 @@
               </div>
               </div>
               <div>
+               <!--  jos olet loggautunut voit jättää kommentteja -->
+                <% if(käyttäjä) { %> 
                   <!--  jätä kommentti -->
                <h5>kommentoi</h5>
                <form action="/vieraskirja/<%=merkintä._id%>/kommentit" method="POST" novalidate class="validoi-tämä">
@@ -55,9 +59,8 @@
                  </div>
                  <button class="btn btn-success mb-4">Lähetä</button>
                </form>
-      
+               <% }  %> 
              
         <% } %>
-        
-       
+               
         <%- include('../partials/scripts') %> 
