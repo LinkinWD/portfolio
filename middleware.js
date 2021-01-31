@@ -1,6 +1,6 @@
 const Vieraskirja = require('./models/vieraskirja')
 const Kommentti = require('./models/kommentit')
-const { vieraskirjaSchema, kommentitSchema } = require('./schemas.js')
+const { vieraskirjaSchema, kommentitSchema, ruokaSchema } = require('./schemas.js')
 const ExpressError = require('./utils/expressError')
 
 //tarkistetaan onkos kirjaantunut, eli onko oikeuksia, kuten myös onko luoja eli lisää oikeuksia, osa sivun sisälle joujaksi ja osa ulkopuolelle ajaxeja ja postmanejä vastaan esim.

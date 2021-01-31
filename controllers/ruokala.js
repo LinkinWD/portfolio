@@ -1,4 +1,4 @@
-const { ruokaSchema} = require('../schemas.js')
+
 const Ruoka = require('../models/ruoka')
 
 module.exports.index = async(req, res) => {
