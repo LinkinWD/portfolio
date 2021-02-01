@@ -1,16 +1,22 @@
 <% layout('/layouts/boilerplate') %> 
+
+<% let viestiNumero = 0 %> 
+
     <h1 class="text-center mb-3">Vieraskirja</h1>
-    <div class="header d-flex justify-content-between">
-    <p>Tervetuloa vieraskirjaan</p>
+    <div class="header d-flex align-items-center text-center flex-column">
+    <p>Tervetuloa vieraskirjaani. Tänne voi jättää tervehdyksen, jos haluaa tai kommentoida tervehdyksiä. Kommentoimiseen tarvitsee olla loggautunut tahi sitten omien kommenttejen poistoo tai viestien muokkaamiseen.</p>
+    <p>Tosin en ole laittanut mitään hirveitä varmistuksia mahdollisten teko accounttejen tekoon, salasana voi olla 1 kirjaimen ja sähköposti vaikka 1@r.</p>
+    <p>Ideana on muiden kokeilu, ei minun.</p>
     <a class="btn btn-warning mb-4" href="/vieraskirja/uusi">Jätä tervehdys</a>
   </div>
         
-            
-                <div class="row">
+ 
+  <div class="row">
+  
                           
                             <% for(merkintä of vieraskirja) { %>
                               <div class="col-lg-6">
-                          <div class="card mt-2">
+                                <div class="card mt-2">
                                 <div class="card-body mb-2">
                                 <h5 class="card-title"><%= merkintä.otsikko %> </h5>
                                 
@@ -30,14 +36,14 @@
                                 <p class="card-text px-1"><%= merkintä.kommentti %> </p>
                                 <p class="card-text px-1"><small> Tervehdyksen jätti: <strong> <%= merkintä.luoja.username %></strong></small> </p>
                                 <div class="card-text p-2">
-                                  <a href="/vieraskirja/<%= merkintä._id %>/edit" class="btn btn-warning btn-warning btn-sm ">Muokkaa tai poista</a>
+                                  <a href="/vieraskirja/<%= merkintä.koska%>/edit" class="btn btn-warning btn-warning btn-sm ">Muokkaa tai poista</a>
                                 </div>
                                 </div>                               
                               </div>
                                <!--  jätä kommentti -->
                                <% if(käyttäjä) { %> 
                                 <h5>kommentoi</h5>
-                                <form action="/vieraskirja/<%=merkintä._id%>/kommentit" method="POST" novalidate class="validoi-tämä">
+                                <form action="/vieraskirja/<%=merkintä.koska%>/kommentit" method="POST" novalidate class="validoi-tämä">
                                   
                                   <div class="mb-1">
                                     <label for="kommentti" class="form-label">Kommenttisi</label>
@@ -50,50 +56,34 @@
                                 </form>
                                 <% }  %> 
                              
-                                 <!--  kommentit -->
+                                 
 
                             </div>                    
                          <!--  columnloppuu -->
                          <div class="col-lg-6">
-                               <h4>Kommentit</h4>
-                                
-
-
-                                <% if(käyttäjä && merkintä.luoja.equals(käyttäjä._id)) {%>                  
-                                <% for (kommentti of merkintä.kommentit) { %>
-                                  <div class="card mt-1">
-                                    <div class="card-body">
-                                      <p class="card-title">Kommentoija: <%= kommentti.luoja.username %> </p>
-                                    <p class="card-text"><%= kommentti.kommentti %> </p> 
-                                    
-                                    <% if(käyttäjä && merkintä.luoja.equals(käyttäjä._id)) {%>
-                                    <form action="/vieraskirja/<%=merkintä._id%>/kommentit/<%=kommentti._id%>?_method=DELETE" method="POST">
-                                      <button class="btn btn-sm btn-warning">Poista</button>
-                                    </form>
-                                    <% } %> 
-                                  </div>
-                                </div>
-                                <% } %> 
-                           
-               <!--  end of kommentti -->
-                        
+                           <!--  kommentit -->
+                           <h4 class="mb-3">Kommentit</h4>
                           
-                         <% } %> 
-                          </div>        
-                    <!-- row loppuu -->
-            
-                
-                <!-- kommentti jutskat alkaa -->
-
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              
-               <!--  jos olet loggautunut voit jättää kommentteja -->
-                
-             
-        <% } %>
+                           
+                            <% for (kommentti of merkintä.kommentit) { %>
+                              <div class="card mt-1">
+                                <div class="card-body">
+                                  <p class="card-title">Kommentoija: <%= kommentti.luoja.username %> </p>
+                                <p class="card-text"><%= kommentti.kommentti %> </p> 
+                                
+                                <% if(käyttäjä && merkintä.luoja.equals(käyttäjä._id)) {%>
+                                <form action="/vieraskirja/<%=merkintä._id%>/kommentit/<%=kommentti._id%>?_method=DELETE" method="POST">
+                                  <button class="btn btn-sm btn-warning">Poista</button>
+                                </form>
+                                <% } %> 
+                              </div>
+                            </div>
+                            <% } %> 
+                          </div>
+                          <% } %>
+                        </div>
+                               
+                                
                
         <%- include('../partials/scripts') %> 
             
