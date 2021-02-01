@@ -1,0 +1,27 @@
+* {
+	font-family: 'Roboto', sans-serif;
+}
+
+body {
+	color: black;
+	background: #dae7e7;
+}
+
+.row {
+	margin: 5px;
+}
+
+.header {
+	margin: 15px;
+	padding: 20px;
+	border-radius: 50px;
+	background: #dae7e7;
+	box-shadow: 10px 10px 30px #b9c4c4, -10px -10px 30px #fbffff;
+}
+
+.card {
+	color: black;
+	border-radius: 20px;
+	background: #dae7e7;
+	box-shadow: inset 2px 2px 6px #b9c4c4, inset -20px -20px 60px #fbffff;
+}

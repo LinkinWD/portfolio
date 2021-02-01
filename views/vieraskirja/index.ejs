@@ -2,10 +2,10 @@
 
 <% let viestiNumero = 0 %> 
 
-    <h1 class="text-center mb-3">Vieraskirja</h1>
-    <div class="header d-flex align-items-center text-center flex-column">
+    <h1 class="text-center mb-4">Vieraskirja</h1>
+    <div class="header d-flex align-items-center text-center flex-column mb-4">
     <p>Tervetuloa vieraskirjaani. Tänne voi jättää tervehdyksen, jos haluaa tai kommentoida tervehdyksiä. Kommentoimiseen tarvitsee olla loggautunut tahi sitten omien kommenttejen poistoo tai viestien muokkaamiseen.</p>
-    <p>Tosin en ole laittanut mitään hirveitä varmistuksia mahdollisten teko accounttejen tekoon, salasana voi olla 1 kirjaimen ja sähköposti vaikka 1@r.</p>
+    <p>Tosin en ole laittanut mitään hirveitä varmistuksia mahdollisten teko accounttejen tekoon, salasana voi olla 1 kirjaimen ja sähköposti vaikka 1@r. Tosin tätä ei myöskään ole luotu miljooniin kommentteihin, sit tulee aika kamalan näköinen, mutta en odota ensimmäistäkään.</p>
     <p>Ideana on muiden kokeilu, ei minun.</p>
     <a class="btn btn-warning mb-4" href="/vieraskirja/uusi">Jätä tervehdys</a>
   </div>
@@ -60,13 +60,13 @@
 
                             </div>                    
                          <!--  columnloppuu -->
-                         <div class="col-lg-6">
+                         <div class="col-lg-6 d-flex flex-column align-items-center mt-4">
                            <!--  kommentit -->
-                           <h4 class="mb-3">Kommentit</h4>
+                           <h6 class="mb-2 me-auto">Kommentit</h6>
                           
                            
                             <% for (kommentti of merkintä.kommentit) { %>
-                              <div class="card mt-1">
+                              <div class="card mb-3 ml-auto" style="width: 18rem;">
                                 <div class="card-body">
                                   <p class="card-title">Kommentoija: <%= kommentti.luoja.username %> </p>
                                 <p class="card-text"><%= kommentti.kommentti %> </p> 
