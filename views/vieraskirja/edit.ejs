@@ -1,0 +1,26 @@
+<% layout('/layouts/boilerplate')%>
+
+<h1>Kirjoitus</h1>
+    <!-- käytetään overrideä -->
+    <form action="/vieraskirja/<%= tervehdys._id %>?_method=PUT" method="post" novalidate class="validoi-tämä">
+    <div>
+        <label class="form-label" for="otsikko"> <%=tervehdys.otsikko%></label>
+        <input type="text" class="form-control" id="otsikko" value="<%=tervehdys.otsikko%>"  name="vieraskirja[otsikko]" required>
+    </div>
+    <div>
+        <label class="form-label" for="kommentti">Kommentti:</label>
+        <input class="form-control" type="text" id="kommentti" name="vieraskirja[kommentti]" value="<%=tervehdys.kommentti%>" required>
+        <div class="invalid-feedback">
+            Tämä pitää olla sisältöä
+          </div>
+    </div>
+    <button class="btn btn-success">Muuta kommenttia</button>
+    
+
+    <a class="btn btn-primary" href="/vieraskirja">Palaa takaisin</a>
+</form>
+<form action="/vieraskirja/<%= tervehdys._id %>?_method=DELETE" method="POST">
+    <button class="btn btn-danger">Poista kommentti</button>
+    </form>
+
+    <%- include('../partials/scripts') %> 
