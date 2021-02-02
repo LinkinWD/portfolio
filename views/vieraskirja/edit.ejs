@@ -1,6 +1,6 @@
 <% layout('/layouts/boilerplate')%>
 
-<div class="col-6 offset-3">
+<div class="col-8 offset-2">
             <div class="header text-center">
             <h1>Muokkaa kirjoitustasi</h1>
             <a class="btn btn-warning" href="/vieraskirja">Palaa takaisin</a>
@@ -8,11 +8,11 @@
             <!-- edit form -->
                 <!-- käytetään overrideä -->
             <form action="/vieraskirja/<%= tervehdys._id %>?_method=PUT" method="post" novalidate class="validoi-tämä">
-                <div>
+                <div class="mt-2">
                     <label class="form-label" for="otsikko"> otsikko</label>
                     <input type="text" class="form-control" id="otsikko" value="<%=tervehdys.otsikko%>"  name="vieraskirja[otsikko]" required>
                 </div>
-                <div>
+                <div class="mt-2">
                     <label class="form-label" for="kommentti">Kommentti:</label>
                     <input class="form-control" type="text" id="kommentti" name="vieraskirja[kommentti]" value="<%=tervehdys.kommentti%>" required>
                     <div class="invalid-feedback">
@@ -25,7 +25,7 @@
 
 
            <!--  deleteform -->
-           <div class="d-flex align-items-center flex-column">
+           <div class="d-flex align-items-center flex-column mt-5">
             <form action="/vieraskirja/<%= tervehdys._id %>?_method=DELETE" method="POST" >
                 <button class="btn btn-danger">Poista kommentti</button>
             </form>

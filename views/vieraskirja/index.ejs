@@ -1,6 +1,6 @@
 <% layout('/layouts/boilerplate') %> 
     <div class="header d-flex flex-column text-center">
-    <h1>Vieraskirja</h1>
+    <h1 class="display-1">Vieraskirja</h1>
     <p>Tervetuloa vieraskirjaan</p>
     <a class="btn btn-warning mb-4" href="/vieraskirja/uusi">Jätä 
     tervehdys</a>
@@ -41,7 +41,7 @@
                     <!--  muokkaa/poista alkaa  -->
                     <!-- Jos local.käyttäjä on sama kuin merkinnän tekijä niin silloin näkyy, katso index.js, käyttäjä = passportin user -->
                     <% if(käyttäjä && merkintä.luoja.equals(käyttäjä._id)) { %> 
-                    <div class="card-body col-md-3">
+                    <div class="card-body">
                       <a href="/vieraskirja/<%= merkintä._id %>/edit" class="btn btn-warning">Muokkaa tai poista</a>
                     </div>
                     <% } %> 
@@ -73,7 +73,7 @@
                     <div>
                     <!--  jos olet loggautunut voit jättää kommentteja -->
                     <% if(käyttäjä) { %>             
-                    <form action="/vieraskirja/<%=merkintä._id%>/kommentit"  method="POST" novalidate class="validoi-tämä">
+                    <form action="/vieraskirja/<%=merkintä._id%>/kommentit"  method="POST" novalidate class="validoi-tämä form-group">
                  
                           <div class="mb-1">
                             <label for="kommentti" class="form-label">Kommentoi</label>
@@ -82,7 +82,7 @@
                               Tässä pitää olla sisältöä
                             </div>
                                   </div>
-                    <button class="btn btn-warning mb-4">Lähetä</button>
+                    <button class="btn btn-warning my-3">Lähetä</button>
                     </form>
                     <% }  %> 
                     </div>
