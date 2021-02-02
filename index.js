@@ -47,7 +47,7 @@ app.use(express.static(path.join(__dirname, 'public')))
 
 //sessionit ja flash viestit
 const sessionConfig = {
-    secret: 'fdkfkds',
+    secret: process.env.SECRET,
     resave: false,
     saveUninitialized: true,
     cookie: {
