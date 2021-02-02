@@ -1,26 +1,36 @@
 <% layout('/layouts/boilerplate')%>
 
-<h1>Kirjoitus</h1>
-    <!-- käytetään overrideä -->
-    <form action="/vieraskirja/<%= tervehdys._id %>?_method=PUT" method="post" novalidate class="validoi-tämä">
-    <div>
-        <label class="form-label" for="otsikko"> <%=tervehdys.otsikko%></label>
-        <input type="text" class="form-control" id="otsikko" value="<%=tervehdys.otsikko%>"  name="vieraskirja[otsikko]" required>
-    </div>
-    <div>
-        <label class="form-label" for="kommentti">Kommentti:</label>
-        <input class="form-control" type="text" id="kommentti" name="vieraskirja[kommentti]" value="<%=tervehdys.kommentti%>" required>
-        <div class="invalid-feedback">
-            Tämä pitää olla sisältöä
-          </div>
-    </div>
-    <button class="btn btn-success">Muuta kommenttia</button>
-    
+<div class="col-6 offset-3">
+            <div class="header text-center">
+            <h1>Muokkaa kirjoitustasi</h1>
+            <a class="btn btn-warning" href="/vieraskirja">Palaa takaisin</a>
+            </div>
+            <!-- edit form -->
+                <!-- käytetään overrideä -->
+            <form action="/vieraskirja/<%= tervehdys._id %>?_method=PUT" method="post" novalidate class="validoi-tämä">
+                <div>
+                    <label class="form-label" for="otsikko"> otsikko</label>
+                    <input type="text" class="form-control" id="otsikko" value="<%=tervehdys.otsikko%>"  name="vieraskirja[otsikko]" required>
+                </div>
+                <div>
+                    <label class="form-label" for="kommentti">Kommentti:</label>
+                    <input class="form-control" type="text" id="kommentti" name="vieraskirja[kommentti]" value="<%=tervehdys.kommentti%>" required>
+                    <div class="invalid-feedback">
+                        Tämä pitää olla sisältöä
+                    </div>
+                </div>
+                <button class="btn btn-warning mt-3">Muuta kommenttia</button>   
+            </form>
+ </div>
 
-    <a class="btn btn-primary" href="/vieraskirja">Palaa takaisin</a>
-</form>
-<form action="/vieraskirja/<%= tervehdys._id %>?_method=DELETE" method="POST">
-    <button class="btn btn-danger">Poista kommentti</button>
-    </form>
 
-    <%- include('../partials/scripts') %> 
+           <!--  deleteform -->
+           <div class="d-flex align-items-center flex-column">
+            <form action="/vieraskirja/<%= tervehdys._id %>?_method=DELETE" method="POST" >
+                <button class="btn btn-danger">Poista kommentti</button>
+            </form>
+        </div>
+
+
+
+ <%- include('../partials/scripts') %> 
