@@ -48,4 +48,30 @@ body {
 .btn-danger:hover {
   background: #440404;
 }
+
+.form-group {
+  -webkit-transition: 1s all;
+  transition: 1s all;
+}
+
+.form-group .form-control {
+  outline: none;
+  border: none;
+  -webkit-transition: 1s all;
+  transition: 1s all;
+  border-radius: 20px;
+  background: #dae7e7;
+  -webkit-box-shadow: 10px 10px 30px #b9c4c4, -10px -10px 30px #fbffff;
+          box-shadow: 10px 10px 30px #b9c4c4, -10px -10px 30px #fbffff;
+}
+
+.form-group .form-control:focus {
+  -webkit-transition: 1s all;
+  transition: 1s all;
+  background: #dae7e7;
+  -webkit-box-shadow: inset 2px 2px 6px #b9c4c4, inset -20px -20px 60px #fbffff;
+          box-shadow: inset 2px 2px 6px #b9c4c4, inset -20px -20px 60px #fbffff;
+  border: none;
+  outline: none;
+}
 /*# sourceMappingURL=lisätyylit.css.map */

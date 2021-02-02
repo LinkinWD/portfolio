@@ -30,14 +30,16 @@ module.exports.renderöiLoggausFormi = (req, res) => {
 
 module.exports.loggaaKäyttäjäSisään = (req, res) => {
     req.flash('onnistu', 'Tervetuloa takasin')
-    const redirectUrl = req.session.returnTo || '/vieraskirja'
+    
+    //tää ei taida toimia, sniff
+    const redirectUrl = req.session.returnTo || '/'
     delete req.session.returnTo
     res.redirect(redirectUrl)
 }
 
 module.exports.loggaaKäyttäjäUlos = (req, res) => {
     req.logOut()
-    req.flash('onnistu', 'Kirjauduit ulos')
+    req.flash('onnistu', 'Kirjauduit ulos')    
     res.redirect('/')
 }
 

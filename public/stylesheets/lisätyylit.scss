@@ -46,4 +46,20 @@ body {
 }
 
 .form-group {
+	transition: 1s all;
+	.form-control {
+		outline: none;
+		border: none;
+		transition: 1s all;
+		border-radius: 20px;
+		background: #dae7e7;
+		box-shadow: 10px 10px 30px #b9c4c4, -10px -10px 30px #fbffff;
+	}
+	.form-control:focus {
+		transition: 1s all;
+		background: #dae7e7;
+		box-shadow: inset 2px 2px 6px #b9c4c4, inset -20px -20px 60px #fbffff;
+		border: none;
+		outline: none;
+	}
 }

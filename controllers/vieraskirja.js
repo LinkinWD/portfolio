@@ -2,6 +2,7 @@ const Vieraskirja = require('../models/vieraskirja')
 
 module.exports.index = async(req, res) => {
     //async functio, että voidaan odottaa, kun tiedot haetaa tietokannasta. Populatea kommentteihin, koska ne on osana vieraskirjaa ja liitetty sen pohjappiirustukseen
+    //console.log(req.user)
     const vieraskirja = await Vieraskirja.find({}).populate({
        path: 'kommentit',
         //lisätään kommentit ja niihin niiden tekijät

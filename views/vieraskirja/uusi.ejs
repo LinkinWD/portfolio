@@ -2,10 +2,11 @@
 
 <!-- bootstrap hoitaa formien validoinnin. muista novalidate, required ja oma luokka, jota scripti ettii-->
 <div class="col-8 offset-2">
-    <div class="header">
-    <h1 class="text-center">Jätä tervehdys</h1>
+    <div class="header text-center">
+    <h1 >Jätä tervehdys</h1>
+    <a class="btn btn-warning" href="/vieraskirja">Palaa takaisin</a>
 </div>       
-        <form action="/vieraskirja" method="post" novalidate class="validoi-tämä">
+        <form action="/vieraskirja" method="post" novalidate class="validoi-tämä form-group">
             
                 <div>
                     <label class="form-label" for="otsikko">Otsikko:</label>

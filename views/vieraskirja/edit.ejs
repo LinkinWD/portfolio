@@ -7,7 +7,7 @@
             </div>
             <!-- edit form -->
                 <!-- käytetään overrideä -->
-            <form action="/vieraskirja/<%= tervehdys._id %>?_method=PUT" method="post" novalidate class="validoi-tämä">
+            <form action="/vieraskirja/<%= tervehdys._id %>?_method=PUT" method="post" novalidate class="validoi-tämä form-group">
                 <div class="mt-2">
                     <label class="form-label" for="otsikko"> otsikko</label>
                     <input type="text" class="form-control" id="otsikko" value="<%=tervehdys.otsikko%>"  name="vieraskirja[otsikko]" required>
