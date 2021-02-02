@@ -1,6 +1,6 @@
 {
     "version": 3,
-    "mappings": "AAAA,AAAA,IAAI,CAAC;EACJ,UAAU,EAAE,SAAS;CACrB",
+    "mappings": "AAAA,AAAA,IAAI,CAAC;EACJ,WAAW,EAAE,oBAAoB;CACjC",
     "sources": [
         "tyyli.scss"
     ],
