@@ -21,7 +21,7 @@ const käyttäjäReitit = require('./routes/käyttäjät')
 //errorit ja validointi
 const catchAsync = require('./utils/catchAsync')
 const ExpressError = require('./utils/expressError')
-const { onAdmin } = require('./middleware')
+const { onAdmin, onKirjautunut } = require('./middleware')
 
 //Yhdistetään tietokantaan
 mongoose.connect('mongodb://localhost:27017/portfolio', {
@@ -99,7 +99,7 @@ app.get('/fakeuser', async(req, res) => {
     res.send(uusiKäyttäjä)
 }) */
 
-app.get('/kassa', onAdmin,catchAsync(async (req, res) => {
+app.get('/kassa', onAdmin, onKirjautunut ,catchAsync(async (req, res) => {
     const tuotteet = await Ruoka.find({})
     res.render('ruokala/kassa', { tuotteet})
 }))

@@ -5,7 +5,7 @@ const ruokala = require('../controllers/ruokala')
 
 //errorit ja validointi
 const catchAsync = require('../utils/catchAsync')
-const {onKirjautunut, validoiRuoka} = require('../middleware')
+const {onKirjautunut, validoiRuoka, onAdmin} = require('../middleware')
 
 
 
@@ -14,9 +14,9 @@ router.get('/', catchAsync(ruokala.index))
 
 router.get('/uusi', ruokala.uusiRuokaFormi)
 
- router.post('/' ,validoiRuoka, catchAsync(ruokala.luoUusiRuokaMyyntiin))
+ router.post('/' ,validoiRuoka, onAdmin, catchAsync(ruokala.luoUusiRuokaMyyntiin))
 
- router.delete('/:id', onKirjautunut, catchAsync(ruokala.poistaRuokaMyynistä))
+ router.delete('/:id', onKirjautunut, onAdmin, catchAsync(ruokala.poistaRuokaMyynistä))
 
  
 

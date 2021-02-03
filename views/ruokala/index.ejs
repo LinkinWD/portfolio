@@ -7,23 +7,29 @@
 <!-- myymälä -->
             <div class="header row">
             <h1 class="text-center">Myytävänä olevat tuotteet</h1>
-                <div class="col-4">
+                <div class="col-3">
                   <h5>Tuote</h5>
                 </div>
-                <div class="col-4">
+                <div class="col-3">
+                  <h5>annoskoko</h5>
+                </div>
+                <div class="col-3">
                   <h5>Määrä</h5>
                 </div>
-                <div class="col-4">
+                <div class="col-3">
                   <h5>Hinta</h5>
                 </div>
             <% for(tuote of tuotteet) { %> 
-                <div class="col-4 m-0">
+                <div class="col-3">
                   <p><%= tuote.nimi %></p>
                 </div>
-                <div class="col-4">
-                  <p><%= tuote.määrä %> annosto</p> 
+                <div class="col-3">
+                  <p><%= tuote.annoskoko %></p>
                 </div>
-                <div class="col-4">
+                <div class="col-3">
+                  <p><%= tuote.määrä %> annosta</p> 
+                </div>
+                <div class="col-3">
                   <p><%= tuote.hinta %> €</p>
                 </div>
             <% } %> 
