@@ -1,3 +1,5 @@
+@charset "UTF-8";
+/* perustyylit 'header' luokka on ylöspäin oleva ja cardissa alaspäin olevat varjot */
 * {
   font-family: 'Roboto', sans-serif;
 }
@@ -74,4 +76,6 @@ body {
   border: none;
   outline: none;
 }
+
+/* perustyylit loppuu */
 /*# sourceMappingURL=lisätyylit.css.map */

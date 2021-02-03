@@ -11,6 +11,7 @@ module.exports.vieraskirjaSchema = Joi.object({
 module.exports.ruokaSchema = Joi.object({
     ruokala: Joi.object({
         nimi: Joi.string().required(),
+        annoskoko: Joi.string().required(),
         hinta: Joi.number().required().min(0),
         määrä: Joi.number().required().min(0)
     }).required()

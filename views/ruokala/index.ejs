@@ -1,14 +1,38 @@
 <% layout('/layouts/boilerplate') %> 
-<h1>Myymälä</h1>
-
+<div class="header">
+<h1 class="display-1 text-center">Ruokala</h1>
+</div>
 <div class="row">
     <div class="col-lg-6">
-<ul>
-<% for(tuote of tuotteet) { %> 
-    <li><%= tuote.nimi %> : <%= tuote.määrä %> annosta: <%= tuote.hinta %> €  </li>
-<% } %> 
-</ul>
-</div>
+<!-- myymälä -->
+            <div class="header row">
+            <h1 class="text-center">Myytävänä olevat tuotteet</h1>
+                <div class="col-4">
+                  <h5>Tuote</h5>
+                </div>
+                <div class="col-4">
+                  <h5>Määrä</h5>
+                </div>
+                <div class="col-4">
+                  <h5>Hinta</h5>
+                </div>
+            <% for(tuote of tuotteet) { %> 
+                <div class="col-4 m-0">
+                  <p><%= tuote.nimi %></p>
+                </div>
+                <div class="col-4">
+                  <p><%= tuote.määrä %> annosto</p> 
+                </div>
+                <div class="col-4">
+                  <p><%= tuote.hinta %> €</p>
+                </div>
+            <% } %> 
+            </div>
+    </div>
+
+
+
+<!-- kuvagalleria -->
 <div class="col-lg-6  d-none d-lg-block">
 <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-inner">
