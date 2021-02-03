@@ -29,20 +29,27 @@
 </div>
     <h3>Mitä haluaisit tilata?</h3>
     <% for(tuote of tuotteet) { %> 
-        <p><%= tuote.nimi %> </p>
-        <p>Jäljellä: <%=  tuote.määrä %> </p>
-        <form action="">
+        <p><strong> <%= tuote.nimi %></strong> </p>
+        
+        <form action="/ruokala/tilaa/<%=tuote._id%> ?_method=PUT" method="POST" class="mb-4" novalidate class="validoi-tämä">
             <Label for="montako">Montako tilaisit?</Label>
-            <input type="number" min="0" max="<%= tuote.määrä %>">
+
+            <input type="number" name="ruokala[määrä]" min="0" max="<%= tuote.määrä %>" required>
+            <div class="invalid-feedback">
+              Tämä kenttä pitää täyttää
+            </div>
+
             <button class="btn btn-sm btn-danger">tilaa</button>
+           
         </form>
+        <hr>
     <% }  %> 
 
 
 
 
 
-<h1>Mitä haluaisit tilata</h1>
+
 
 
 <div class="d-flex flex-column mt-4">
