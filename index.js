@@ -104,6 +104,11 @@ app.get('/kassa', onAdmin, onKirjautunut ,catchAsync(async (req, res) => {
     res.render('ruokala/kassa', { tuotteet})
 }))
 
+app.get('/tilaa', catchAsync(async(req,res) => {
+    const tuotteet = await Ruoka.find({})
+    res.render('ruokala/tilaa', { tuotteet })
+}))
+
 //kun mikään aiempi sivu ei natsannut, tulee, sivua ei löydy
 app.all('*', (req, res, next) => {
     //next työntää sen tohon alempaan error handleriin

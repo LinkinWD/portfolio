@@ -73,16 +73,12 @@
   </div>
 </div>
 </div>
-<h1>Mitä haluaisit tilata</h1>
-<form action="">
-    <label for="select">tuotteet</label>
-    <select name="ruokala[nimi]" id="nimi">
-        <% for(tuote of tuotteet) { %> 
-            <option value="<%= tuote.nimi %> "><%= tuote.nimi %> </option>
-            <%  } %> 
-    </select>
-    <label for="">montako annosta</label>
-    <input type="number">
-</form>
+
+
+<div class="d-flex flex-column mt-4">
+<a class="btn btn-warning" href="/tilaa">Tilaa ruokia </a>
+</div>
+
+
 <%- include('../partials/scripts') %> 
-<script src="javascripts/ruokala.js"></script>
+

@@ -10,7 +10,9 @@ const {onKirjautunut, validoiRuoka, onAdmin} = require('../middleware')
 
 
 
-router.get('/', catchAsync(ruokala.index)) 
+router.get('/', catchAsync(ruokala.index))
+
+// router.get('/tilaa', onKirjautunut, ruokala.tilaaRuokaa)
 
 router.get('/uusi', ruokala.uusiRuokaFormi)
 

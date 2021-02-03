@@ -1,0 +1,52 @@
+<% layout('/layouts/boilerplate') %> 
+
+
+<h1>Tilaa</h1>
+
+<!-- myynnissä olevat tuotteet -->
+<div class="header row">
+    <h1 class="text-center">Myytävänä olevat tuotteet</h1>
+        <div class="col-3">
+          <h5>Tuote</h5>
+        </div>
+        <div class="col-3">
+          <h5>annoskoko</h5>
+        </div>
+        <div class="col-3">
+          <h5>Määrä</h5>
+        </div>
+        <div class="col-3">
+          <h5>Hinta</h5>
+        </div>
+
+        <% for(tuote of tuotteet) { %> 
+            <div class="col-3"><%= tuote.nimi %> </div>
+            <div class="col-3"><%= tuote.annoskoko %> </div>
+            <div class="col-3"><%= tuote.määrä %> </div>
+            <div class="col-3"><%= tuote.hinta %> </div>
+        <% }  %> 
+        </div>     
+</div>
+    <h3>Mitä haluaisit tilata?</h3>
+    <% for(tuote of tuotteet) { %> 
+        <p><%= tuote.nimi %> </p>
+        <p>Jäljellä: <%=  tuote.määrä %> </p>
+        <form action="">
+            <Label for="montako">Montako tilaisit?</Label>
+            <input type="number" min="0" max="<%= tuote.määrä %>">
+            <button class="btn btn-sm btn-danger">tilaa</button>
+        </form>
+    <% }  %> 
+
+
+
+
+
+<h1>Mitä haluaisit tilata</h1>
+
+
+<div class="d-flex flex-column mt-4">
+<a class="btn btn-warning" href="/ruokala">Palaa ruokalaaan</a>
+</div>
+<%- include('../partials/scripts') %> 
+<script src="javascripts/ruokala.js"></script>

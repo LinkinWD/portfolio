@@ -7,6 +7,10 @@ module.exports.index = async(req, res) => {
     res.render('ruokala/index', {tuotteet})
 }
 
+/* module.exports.tilaaRuokaa = (req,res) => {
+    res.render('ruokala/tilaa')
+}
+ */
 module.exports.uusiRuokaFormi = (req, res) => {
     res.render('ruokala/uusi')
  
