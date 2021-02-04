@@ -57,9 +57,15 @@ router.put('/tilaa/:id', catchAsync( async(req, res) => {
     res.redirect('/ruokala')
 }))
 
-
+router.delete('/kassa/:id', catchAsync(async(req, res) => {
+   
+    const { id } = req.params
+    await Tilaus.findByIdAndDelete(id)
+    res.redirect('/ruokala/kassa')
+} ))
 
 router.delete('/:id', onKirjautunut, onAdmin, catchAsync(ruokala.poistaRuokaMyynistä))
+
 
  
 

@@ -1,37 +1,59 @@
 <% layout('/layouts/boilerplate') %> 
-<h1>kassa</h1>
 
-<h1>Myynyssä olevat tuotteeet</h1>
+<div class="header text-center">
+<h1>Myynnissä olevat tuotteeet</h1>
+</div>
 
-<ul>
-    
+<div class="row">
 <% for(tuote of tuotteet) { %> 
-    <li>Tuote: <%= tuote.nimi %> ----Annoksia jäljellä nyt: <%= tuote.määrä %></li>
-</form>
-<form action="/ruokala/kassa/<%=tuote._id%>?_method=PUT" method="POST">
-    <input type="range" value="<%= tuote.määrä %>" min="1" max="20" oninput="this.nextElementSibling.value = this.value" name="ruokala[määrä]" class="form-control">
-<output><%=tuote.määrä%></output>
-<span>Annosta</span><br>
-<button class="btn btn-primary">muuta</button>
-</form>
+<h5 class="text-center">Tuote: <%= tuote.nimi %> ----Annoksia jäljellä nyt: <%= tuote.määrä %></h5>
+        <div class="col-6">
+            
+            <form action="/ruokala/kassa/<%=tuote._id%>?_method=PUT" method="POST">
+                <input type="range" value="<%= tuote.määrä %>" min="1" max="20" oninput="this.nextElementSibling.value = this.value" name="ruokala[määrä]" class="form-control">
+            <output><%=tuote.määrä%></output>
+            <span>Annosta</span><br>
+            <button class="btn btn-warning">muuta</button>
+            </form>
+        </div>
+        <div class="col-6">
+            <form action="/ruokala/<%= tuote._id %>?_method=DELETE" method="POST" class="d-inline">
+                <button class="btn btn-danger">Poista tuote myynnistä</button>
+                </form>
+            </div>
+           
+            <% } %> 
+            <hr class="mt-3">
+</div>
 
+<div class="d-flex flex-column m-5">
+<a class="btn btn-warning" href="/ruokala/uusi">Lisää uusi tuote myyntiin</a>
+</div>
 
-<form action="/ruokala/<%= tuote._id %>?_method=DELETE" method="POST">
-    <button class="btn btn-danger">Poista tuote</button>
-    </form>
-<% } %> 
-</ul>
-
-<a class="btn btn-success" href="/ruokala/uusi">Lisää ruoka myyntiin</a>
-
-
+<div class="header text-center">
 <h2>Voimassa olevat tilaukset</h2>
-<% for(tilaus of tilaukset) { %>
-    <p><%= tilaus.tuote %> </p>
-    <p><%= tilaus.määrä %> </p>
-    <p><%= tilaus.tilaaja.username %> </p>
-    <p><%= tilaus.tilaaja.email %> </p>
+</div>
+
+<div class="row">
+    
+            
+            <% for(tilaus of tilaukset) { %> 
+            <div class="col-9">
+                <p class="lh-1 text-center"><%= tilaus.tuote %> </p>
+                <p class="lh-1">Määrä: <%= tilaus.määrä %> </p>
+                <p class="lh-1">Tilaaja: <%= tilaus.tilaaja.username %> </p>            
+                <p class="lh-1"><%= tilaus.tilaaja.email %> </p>
+            </div>
+            <div class="col-3 mt-4">
+                <form action="/ruokala/kassa/<%= tilaus._id %>?_method=DELETE" method="POST">
+                    <button class="btn btn-sm btn-danger">Kuittaa tilaus ja poista</button>
+                </form>
+            </div>
+            <hr>
 <% } %> 
+    </div>
+
+
 
 <%- include('../partials/scripts') %> 
 <script src="javascripts/kassa.js"></script>
