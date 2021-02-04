@@ -99,28 +99,8 @@ app.get('/fakeuser', async(req, res) => {
     res.send(uusiKäyttäjä)
 }) */
 
-app.get('/ruokala/kassa', onAdmin, onKirjautunut ,catchAsync(async (req, res) => {
-    const tuotteet = await Ruoka.find({})
-    res.render('ruokala/kassa', { tuotteet})
-}))
 
-app.get('/ruokala/tilaa', catchAsync(async(req,res) => {
-    const tuotteet = await Ruoka.find({})
-    res.render('ruokala/tilaa', { tuotteet })
-}))
 
-app.put('/ruokala/tilaa/:id', catchAsync( async(req, res) => {
-    const { id } = req.params
-   
-    const ruoka = await Ruoka.findById(id)
-    
-    const määrä =  {...req.body.ruokala}
-    console.log(ruoka)
-
-    
-  
-    res.render('home')
-}))
 
 //kun mikään aiempi sivu ei natsannut, tulee, sivua ei löydy
 app.all('*', (req, res, next) => {

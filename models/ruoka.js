@@ -3,6 +3,7 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 const RuokaSchema = new Schema({
+   
     nimi: String,
     annoskoko: String,
     määrä: Number,

@@ -20,12 +20,12 @@ module.exports.uusiRuokaFormi = (req, res) => {
     // console.log(req.body)
     const ruoka = new Ruoka(req.body.ruokala)
     await ruoka.save()
-    res.redirect('/kassa')
+    res.redirect('ruokala/kassa')
  }
 
  module.exports.poistaRuokaMyynistä = async (req, res) => {
     const { id } = req.params
     await Ruoka.findByIdAndDelete(id)
-    res.redirect('/kassa')
+    res.redirect('/ruokala/kassa')
 }
 

@@ -31,10 +31,10 @@
     <% for(tuote of tuotteet) { %> 
         <p><strong> <%= tuote.nimi %></strong> </p>
         
-        <form action="/ruokala/tilaa/<%=tuote._id%> ?_method=PUT" method="POST" class="mb-4" novalidate class="validoi-tämä">
+        <form action="/ruokala/tilaa/<%=tuote._id%>?_method=PUT" method="POST" class="mb-4" novalidate class="validoi-tämä">
             <Label for="montako">Montako tilaisit?</Label>
 
-            <input type="number" name="ruokala[määrä]" min="0" max="<%= tuote.määrä %>" required>
+            <input type="number" name="tilaus" min="0" max="<%= tuote.määrä %>" required>
             <div class="invalid-feedback">
               Tämä kenttä pitää täyttää
             </div>
