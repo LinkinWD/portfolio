@@ -6,14 +6,16 @@
 <ul>
     
 <% for(tuote of tuotteet) { %> 
-    <li><%= tuote.nimi %> : <%= tuote.määrä %> annosta: <%= tuote.hinta %> €  </li>
+    <li>Tuote: <%= tuote.nimi %> ----Annoksia jäljellä nyt: <%= tuote.määrä %></li>
 </form>
-<form action="">
+<form action="/ruokala/kassa/<%=tuote._id%>?_method=PUT" method="POST">
     <input type="range" value="<%= tuote.määrä %>" min="1" max="20" oninput="this.nextElementSibling.value = this.value" name="ruokala[määrä]" class="form-control">
-<output><%= tuote.määrä %></output>
+<output><%=tuote.määrä%></output>
+<span>Annosta</span><br>
 <button class="btn btn-primary">muuta</button>
-
 </form>
+
+
 <form action="/ruokala/<%= tuote._id %>?_method=DELETE" method="POST">
     <button class="btn btn-danger">Poista tuote</button>
     </form>
@@ -22,6 +24,14 @@
 
 <a class="btn btn-success" href="/ruokala/uusi">Lisää ruoka myyntiin</a>
 
+
+<h2>Voimassa olevat tilaukset</h2>
+<% for(tilaus of tilaukset) { %>
+    <p><%= tilaus.tuote %> </p>
+    <p><%= tilaus.määrä %> </p>
+    <p><%= tilaus.tilaaja.username %> </p>
+    <p><%= tilaus.tilaaja.email %> </p>
+<% } %> 
 
 <%- include('../partials/scripts') %> 
 <script src="javascripts/kassa.js"></script>
