@@ -84,4 +84,8 @@ hr {
 }
 
 /* perustyylit loppuu */
+/* kassan output */
+output {
+  font-size: 2em;
+}
 /*# sourceMappingURL=lisätyylit.css.map */

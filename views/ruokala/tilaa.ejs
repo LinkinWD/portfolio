@@ -31,14 +31,11 @@
     <% for(tuote of tuotteet) { %> 
         <p><strong> <%= tuote.nimi %></strong> </p>
         
-        <form action="/ruokala/tilaa/<%=tuote._id%>?_method=PUT" method="POST" class="mb-4" novalidate class="validoi-tämä">
+        <form action="/ruokala/tilaa/<%=tuote._id%>?_method=PUT" method="POST" class="mb-4" >
             <Label for="montako">Montako tilaisit?</Label>
 
-            <input type="number" name="tilaus" min="0" max="<%= tuote.määrä %>" required>
-            <div class="invalid-feedback">
-              Tämä kenttä pitää täyttää
-            </div>
-
+            <input type="number" name="tilaus" min="0" max="<%= tuote.määrä %>">
+            
             <button class="btn btn-sm btn-danger">tilaa</button>
            
         </form>
@@ -52,8 +49,9 @@
 
 
 
-<div class="d-flex flex-column mt-4">
+<div class="d-flex flex-column m-4">
 <a class="btn btn-warning" href="/ruokala">Palaa ruokalaaan</a>
 </div>
-<%- include('../partials/scripts') %> 
-<script src="javascripts/ruokala.js"></script>
+
+
+

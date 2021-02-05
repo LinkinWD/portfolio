@@ -18,15 +18,15 @@ router.post('/' ,validoiRuoka, catchAsync(ruokala.luoUusiRuokaMyyntiin))
 
 router.get('/kassa', onAdmin, onKirjautunut ,catchAsync(ruokala.kassa))
 
-router.put('/kassa/:id', onAdmin, catchAsync(ruokala.moukkaaRuokaMäärää))
+router.put('/kassa/:id', onAdmin, onKirjautunut, catchAsync(ruokala.moukkaaRuokaMäärää))
 
-router.get('/uusi', onAdmin, ruokala.uusiRuokaFormi)
+router.get('/uusi', onAdmin, onKirjautunut, ruokala.uusiRuokaFormi)
 
 router.get('/tilaa', onKirjautunut, catchAsync(ruokala.uusiTilaaFormi))
 
 router.put('/tilaa/:id', onKirjautunut, catchAsync( ruokala.luoUusiTilaus))
 
-router.delete('/kassa/:id', onAdmin, catchAsync(ruokala.merkitseTilausVastaanotetuksi ))
+router.delete('/kassa/:id', onAdmin, onKirjautunut, catchAsync(ruokala.merkitseTilausVastaanotetuksi ))
 
 router.delete('/:id', onKirjautunut, onAdmin, catchAsync(ruokala.poistaRuokaMyynistä))
 
