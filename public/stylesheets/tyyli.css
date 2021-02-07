@@ -87,6 +87,13 @@ main {
   margin-top: -20px;
 }
 
+main .kaavio {
+  position: relative;
+  width: 50vw;
+  height: 50vh;
+  margin: auto;
+}
+
 footer {
   height: 100vh;
   background-image: -webkit-gradient(linear, left top, left bottom, from(#f0f40d), to(#fdfdfa));

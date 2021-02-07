@@ -53,6 +53,12 @@ main {
 	height: 100vh;
 	background-image: linear-gradient(#a70ac0, #f0f40d);
 	margin-top: -20px;
+	.kaavio {
+		position: relative;
+		width: 50vw;
+		height: 50vh;
+		margin: auto;
+	}
 }
 
 footer {
