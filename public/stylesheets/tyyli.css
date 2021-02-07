@@ -1,7 +1,11 @@
-body {
-  font-family: 'Roboto', sans-serif;
+* {
   margin: 0;
   padding: 0;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  position: relative;
 }
 
 header {
@@ -31,16 +35,42 @@ header h1 {
   font-size: clamp(4em, 6vw, 6em);
 }
 
+header .pallo1 {
+  position: absolute;
+  top: 25vh;
+  left: 25vw;
+  z-index: 1;
+  width: 250px;
+  height: 250px;
+  background-color: black;
+}
+
+header .pallo2 {
+  position: absolute;
+  top: 35vh;
+  right: 25vw;
+  z-index: 1;
+  width: 250px;
+  height: 250px;
+  background-color: black;
+}
+
+header .pallo3 {
+  position: absolute;
+  top: 55vh;
+  right: 5vw;
+  z-index: 1;
+  width: 250px;
+  height: 250px;
+  background-color: black;
+}
+
 header .ajokortti {
-  width: 35vw;
-  height: 30vh;
-  display: -ms-inline-grid;
-  display: inline-grid;
-  -ms-grid-columns: 1fr 1fr;
-      grid-template-columns: 1fr 1fr;
-  font-size: clamp(1em, 2vw, 2em);
-  line-height: 0;
-  background: rgba(255, 255, 255, 0.25);
+  z-index: 2;
+  width: 40vw;
+  height: 500px;
+  background: -webkit-gradient(linear, left bottom, right top, from(rgba(255, 255, 255, 0.25)), to(rgba(255, 255, 255, 0.65)));
+  background: linear-gradient(to top right, rgba(255, 255, 255, 0.25), rgba(255, 255, 255, 0.65));
   -webkit-box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
           box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
   backdrop-filter: blur(4px);
@@ -49,7 +79,21 @@ header .ajokortti {
   border: 1px solid rgba(255, 255, 255, 0.18);
 }
 
-header .ajokortti .kuva {
+header .ajokortti .logo {
+  padding: 20px;
+  text-align: center;
+}
+
+header .ajokortti .gridi {
+  display: -ms-inline-grid;
+  display: inline-grid;
+  -ms-grid-columns: 1fr 1fr;
+      grid-template-columns: 1fr 1fr;
+  font-size: clamp(1em, 2vw, 2em);
+  line-height: 0;
+}
+
+header .ajokortti .gridi .kuva {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -61,12 +105,12 @@ header .ajokortti .kuva {
           justify-content: center;
 }
 
-header .ajokortti .kuva img {
+header .ajokortti .gridi .kuva img {
   width: 70%;
   width: 70%;
 }
 
-header .ajokortti .teksti {
+header .ajokortti .gridi .teksti {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -84,7 +128,14 @@ main {
   height: 100vh;
   background-image: -webkit-gradient(linear, left top, left bottom, from(#a70ac0), to(#f0f40d));
   background-image: linear-gradient(#a70ac0, #f0f40d);
-  margin-top: -20px;
+}
+
+main h3 {
+  padding: 40px;
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: clamp(2em, 4vw, 4em);
+  text-align: center;
 }
 
 main .kaavio {
