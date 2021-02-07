@@ -1,52 +1,49 @@
 <% layout('/layouts/boilerplate') %> 
 
 
-<h1>Tilaa</h1>
+<h1 class="text-center">Tee tilaus</h1>
 
 <!-- myynnissä olevat tuotteet -->
 <div class="header row">
     <h1 class="text-center">Myytävänä olevat tuotteet</h1>
-        <div class="col-3">
+        <div class="col-3 d-none d-md-block">
           <h5>Tuote</h5>
         </div>
-        <div class="col-3">
-          <h5>annoskoko</h5>
+        <div class="col-3 d-none d-md-block">
+          <h5>Annoskoko</h5>
         </div>
-        <div class="col-3">
+        <div class="col-3 d-none d-md-block">
           <h5>Määrä</h5>
         </div>
-        <div class="col-3">
+        <div class="col-3 d-none d-md-block">
           <h5>Hinta</h5>
         </div>
 
         <% for(tuote of tuotteet) { %> 
-            <div class="col-3"><%= tuote.nimi %> </div>
-            <div class="col-3"><%= tuote.annoskoko %> </div>
-            <div class="col-3"><%= tuote.määrä %> </div>
-            <div class="col-3"><%= tuote.hinta %> </div>
+            <div class="col-sm-3 lh-1"><strong> <%= tuote.nimi %></strong> </div>
+            <div class="col-sm-3 lh-1"><span class="d-xl-none d-sm-inline">Annoskoko: </span> <%= tuote.annoskoko %> </div>
+            <div class="col-sm-3 lh-1"><span class="d-xl-none d-sm-inline">Jäljellä: </span> <%= tuote.määrä %> </div>
+            <div class="col-sm-3 lh-1"><span class="d-xl-none d-sm-inline">Hinta: </span><%= tuote.hinta %> </div>
+            <hr>
         <% }  %> 
-        </div>     
-</div>
+</div>     
+
     <h3>Mitä haluaisit tilata?</h3>
     <% for(tuote of tuotteet) { %> 
         <p><strong> <%= tuote.nimi %></strong> </p>
         
-        <form action="/ruokala/tilaa/<%=tuote._id%>?_method=PUT" method="POST" class="mb-4" >
-            <Label for="montako">Montako tilaisit?</Label>
+        <form action="/ruokala/tilaa/<%=tuote._id%>?_method=PUT" method="POST" novalidate class="mb-4 validoi-tämä" >
+            <Label class="form-label" for="montako">Montako tilaisit?</Label>
 
-            <input type="number" name="tilaus" min="0" max="<%= tuote.määrä %>">
-            
+            <input type="number" name="tilaus" min="0" max="<%= tuote.määrä %>" required>
+            <div class="invalid-feedback">
+              Montako haluat?
+          </div>
             <button class="btn btn-sm btn-danger">tilaa</button>
            
         </form>
         <hr>
     <% }  %> 
-
-
-
-
-
-
 
 
 <div class="d-flex flex-column m-4">

@@ -1,7 +1,43 @@
-<% layout('/layouts/boilerplate') %> 
-<link rel="preconnect" href="https://fonts.gstatic.com">
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-<h1>kotona olet</h1>
-
-<%- include('./partials/scripts') %> 
-<!-- Oli pakko siirtää bootstrappi boilerplatesta, koska tartten omia scriptejä sen perään -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="/stylesheets/tyyli.css">
+</head>
+<body>
+   
+    <header>
+        <h1>Portfolio</h1>
+        <div class="logo">
+        <img src="images/silppu.png" alt="LinkinWD logo">
+        </div>
+        <div class="ajokortti">
+            <div class="kuva">
+            <img src="images/jarmomv.png" alt="minäkuva">
+            </div>
+            <div class="teksti">
+                <div>
+                <p>Opiskelija</p>
+                <p>Jarmo Lindström</p>
+                </div>
+                <div>
+                <p>Suuntaus</p>
+                <p>Front-end kehittäjä</p>
+                </div>
+            </div>
+    </div>
+    </header>
+    <main>
+        <h3>Tools</h3>
+    </main>
+    <footer>
+        <h3>Github</h3>
+    </footer>
+   
+</body>
+</html>

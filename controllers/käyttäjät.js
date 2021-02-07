@@ -14,8 +14,10 @@ module.exports.rekisteröiUusiKäyttäjä = async(req, res, next) =>{
     //logattaan uusi käyttäjä sisään
     req.login(registöröityKäyttäja, err => {
         if(err) return next(err)
-        req.flash('onnistu', 'Tervetuloa vieraskirjaani!')
-        res.redirect('/vieraskirja')
+        req.flash('onnistu', 'Tervetuloa portfoliooni!')
+        const redirectUrl = req.session.returnTo || '/'
+    delete req.session.returnTo
+    res.redirect(redirectUrl)
     })
     } catch(e) {
         req.flash('error', e.message)
@@ -31,7 +33,6 @@ module.exports.renderöiLoggausFormi = (req, res) => {
 module.exports.loggaaKäyttäjäSisään = (req, res) => {
     req.flash('onnistu', 'Tervetuloa takasin')
     
-    //tää ei taida toimia, sniff
     const redirectUrl = req.session.returnTo || '/'
     delete req.session.returnTo
     res.redirect(redirectUrl)
