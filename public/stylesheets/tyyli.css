@@ -35,7 +35,7 @@ header h1 {
   font-size: clamp(4em, 6vw, 6em);
 }
 
-header .pallo1 {
+header .taustapallo1 {
   position: absolute;
   top: 25vh;
   left: 25vw;
@@ -45,7 +45,7 @@ header .pallo1 {
   background-color: black;
 }
 
-header .pallo2 {
+header .taustapallo2 {
   position: absolute;
   top: 35vh;
   right: 25vw;
@@ -55,7 +55,7 @@ header .pallo2 {
   background-color: black;
 }
 
-header .pallo3 {
+header .taustapallo3 {
   position: absolute;
   top: 55vh;
   right: 5vw;
@@ -67,7 +67,7 @@ header .pallo3 {
 
 header .ajokortti {
   z-index: 2;
-  width: 40vw;
+  width: 800px;
   height: 500px;
   background: -webkit-gradient(linear, left bottom, right top, from(rgba(255, 255, 255, 0.25)), to(rgba(255, 255, 255, 0.65)));
   background: linear-gradient(to top right, rgba(255, 255, 255, 0.25), rgba(255, 255, 255, 0.65));
@@ -84,48 +84,31 @@ header .ajokortti .logo {
   text-align: center;
 }
 
-header .ajokortti .gridi {
-  display: -ms-inline-grid;
-  display: inline-grid;
-  -ms-grid-columns: 1fr 1fr;
-      grid-template-columns: 1fr 1fr;
-  font-size: clamp(1em, 2vw, 2em);
-  line-height: 0;
-}
-
-header .ajokortti .gridi .kuva {
+header .ajokortti .container {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
 }
 
-header .ajokortti .gridi .kuva img {
-  width: 70%;
+header .ajokortti .container img {
   width: 70%;
 }
 
-header .ajokortti .gridi .teksti {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  font-weight: 700;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+header .ajokortti .container .teksti {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-rows: (20%)[5];
+      grid-template-rows: repeat(5, 20%);
+  font-size: clamp(1.5em, 4vw, 2em);
 }
 
 main {
-  height: 100vh;
   background-image: -webkit-gradient(linear, left top, left bottom, from(#a70ac0), to(#f0f40d));
   background-image: linear-gradient(#a70ac0, #f0f40d);
 }
@@ -145,10 +128,41 @@ main .kaavio {
   margin: auto;
 }
 
+main .pallo1 {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background-color: brown;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+main .pallo2 {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background-color: brown;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
 footer {
   height: 100vh;
   background-image: -webkit-gradient(linear, left top, left bottom, from(#f0f40d), to(#fdfdfa));
   background-image: linear-gradient(#f0f40d, #fdfdfa);
-  margin-top: -20px;
 }
 /*# sourceMappingURL=tyyli.css.map */
