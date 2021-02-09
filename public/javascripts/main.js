@@ -1,6 +1,36 @@
 
 const donitsi = document.getElementById('donitsi');
 
+
+// Wrap every letter in a span
+var textWrapper = document.querySelector('.otsikko .kirjaimet');
+textWrapper.innerHTML = textWrapper.textContent.replace(/\S/g, "<span class='letter'>$&</span>");
+
+anime.timeline()
+.add({
+    targets: '.otsikko',
+    opacity: 0,
+    duration: 1000,
+    easing: "easeOutExpo",
+    delay: 1000
+  })
+  .add({
+    targets: '.otsikko',
+    opacity: 1,
+    duration: 100,
+    easing: "easeOutExpo",
+    delay: 100
+  })
+  .add({
+    targets: '.otsikko .kirjaimet',
+    scale: [0, 1],
+    duration: 1500,
+    elasticity: 600,
+    delay: (el, i) => 45 * (i+1)
+  });
+
+
+
 const chart = new Chart(donitsi, {
     type: 'doughnut',
     data: {
@@ -10,15 +40,15 @@ const chart = new Chart(donitsi, {
             data: [50, 25 ,25],
            
             backgroundColor: [
-                'rgba(255, 99, 132, 1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)'
+                'rgb(3, 218, 198)',
+                'rgb(244, 212, 124)',
+                'rgb(188, 111, 241)'
                 
             ],
             borderColor: [
-                'rgba(255, 99, 132, 1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)'
+                'rgb(3, 218, 198)',
+                'rgb(244, 212, 124)',
+                'rgb(188, 111, 241)'
                 
             ],
             borderWidth: 1
@@ -28,9 +58,10 @@ const chart = new Chart(donitsi, {
         legend: {
             position: 'right',
             labels: {
-                fontColor: 'black',
-                fontSize: 20, 
-                padding: 30
+                fontColor: 'rgba(255, 255, 255, 0.6)',
+                fontSize: 11, 
+                padding: 20
+                
             }
          },
          rotation: (-0.5 * Math.PI) - (25/180 * Math.PI),
