@@ -5,16 +5,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>portfolio</title>
+    <link rel="stylesheet" href="/stylesheets/bootstrap.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous">
     <link rel="stylesheet" href="/stylesheets/tyyli.css">
 </head>
 <body>
-   
-    <header>
-
-        <h1 class="otsikko">Portfolio</h1>
-       
+    <%- include('./partials/navbar') %>
+    <h1 class="otsikko">Portfolio</h1>
+    <header>   
     <div class="taustapallo1"></div>
     <div class="taustapallo2"></div>
     <div class="taustapallo3"></div>
@@ -41,7 +40,7 @@
     </header>
     <main>
         <div class="esittely">
-            <div class="otsikko">
+            <div>
                 
                     <h5>Miten jaan opintoni?<h5>
            
@@ -49,7 +48,7 @@
             <div class="kaavio">
                 <canvas id="donitsi"></canvas>       
             </div>
-            <div class="otsikko">
+            <div>
             <h5>Mitä opiskelen</h5>
             </div>
             <div class="taidot">
@@ -66,7 +65,7 @@
         <button><a href="https://github.com/LinkinWD/portfolio">Github</a><i class="fab fa-github"></i></button>
         <h4>Projektin koodi</h4>
     </footer>
-   
+    <%- include('./partials/scripts') %> 
     <script src="javascripts/chart.bundle.min.js"></script>
     <script src="javascripts/anime.min.js"></script>
     <script src="javascripts/main.js"></script>

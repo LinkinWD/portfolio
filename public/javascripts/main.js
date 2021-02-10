@@ -66,10 +66,10 @@ function randomValues() {
 		targets: '.taustapallo1, .taustapallo2, .taustapallo3, .taustapallo4',
 
 		translateX: function() {
-			return anime.random(-10, 10) + 'vw';
+			return anime.random(-200, 200) + 'px';
 		},
 		translateY: function() {
-			return anime.random(-10, 10) + 'vh';
+			return anime.random(-200, 200) + 'px';
 		},
 		/* scale: function() {
 			return anime.random(10, 30) / 10;

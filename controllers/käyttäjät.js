@@ -31,7 +31,7 @@ module.exports.renderöiLoggausFormi = (req, res) => {
 }
 
 module.exports.loggaaKäyttäjäSisään = (req, res) => {
-    req.flash('onnistu', 'Tervetuloa takasin')
+     req.flash('onnistu', 'Tervetuloa takasin')
     
     const redirectUrl = req.session.returnTo || '/'
     delete req.session.returnTo

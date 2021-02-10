@@ -10,8 +10,27 @@ body {
   position: relative;
 }
 
+.otsikko {
+  height: 20vh;
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: clamp(3em, 5vw, 6em);
+  color: #bc6ff1;
+  text-shadow: 4px 4px 10px #1f1b1d;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
 header {
-  height: 100vh;
+  height: 80vh;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -24,15 +43,6 @@ header {
           align-items: center;
   -ms-flex-pack: distribute;
       justify-content: space-around;
-}
-
-header .otsikko {
-  text-align: center;
-  text-transform: uppercase;
-  font-weight: 700;
-  font-size: clamp(4em, 3vw, 6em);
-  color: #bc6ff1;
-  text-shadow: 4px 4px 10px #1f1b1d;
 }
 
 header .taustapallo1 {
@@ -94,8 +104,12 @@ header .ajokortti {
 }
 
 header .ajokortti .logo {
-  width: 70%;
+  width: 60%;
   margin: auto;
+}
+
+header .ajokortti .logo img {
+  width: 300px;
 }
 
 header .ajokortti .container {
@@ -105,9 +119,10 @@ header .ajokortti .container {
   -webkit-box-pack: space-evenly;
       -ms-flex-pack: space-evenly;
           justify-content: space-evenly;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
+  line-height: 0.5;
 }
 
 header .ajokortti .container img {
@@ -152,8 +167,8 @@ main .esittely h5 {
 main .esittely .kaavio {
   position: relative;
   padding-top: 20px;
-  width: 20vw;
-  height: 20vh;
+  width: 400px;
+  height: auto;
   margin: auto;
   -webkit-box-shadow: 8px 8px 6px #080808, -8px -8px 6px #1c1c1c;
           box-shadow: 8px 8px 6px #080808, -8px -8px 6px #1c1c1c;
@@ -162,7 +177,7 @@ main .esittely .kaavio {
 main .esittely .taidot {
   color: rgba(255, 255, 255, 0.6);
   margin: auto;
-  height: 230px;
+  height: 200px;
   width: 400px;
   -webkit-box-shadow: inset 8px 8px 6px #080808, inset -8px -8px 6px #1c1c1c;
           box-shadow: inset 8px 8px 6px #080808, inset -8px -8px 6px #1c1c1c;
@@ -170,39 +185,7 @@ main .esittely .taidot {
 
 main .esittely .taidot p {
   text-align: center;
-  padding-top: 35px;
-}
-
-main .pallo1 {
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  background-color: brown;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-}
-
-main .pallo2 {
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  background: radial-gradient(circle at 100px 100px, #e50000, #000);
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  padding-top: 25px;
 }
 
 footer {
@@ -252,5 +235,107 @@ footer h4 {
   margin-top: 20px;
   margin-bottom: 50px;
   font-size: clamp(1em, 2vw, 1.5em);
+}
+
+/* Mediaqueries */
+@media screen and (max-width: 600px) {
+  header {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+  }
+  header .ajokortti {
+    z-index: 2;
+    width: 300px;
+    height: 300px;
+    background: -webkit-gradient(linear, left bottom, right top, from(rgba(255, 255, 255, 0.25)), to(rgba(255, 255, 255, 0.65)));
+    background: linear-gradient(to top right, rgba(255, 255, 255, 0.25), rgba(255, 255, 255, 0.65));
+    -webkit-box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+  }
+  header .ajokortti .logo {
+    width: 70%;
+    margin: auto;
+    margin-bottom: 20px;
+  }
+  header .ajokortti .logo img {
+    width: 200px;
+  }
+  header .ajokortti .container {
+    -webkit-box-pack: space-evenly;
+        -ms-flex-pack: space-evenly;
+            justify-content: space-evenly;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+  }
+  header .ajokortti .container img {
+    width: 130px;
+  }
+  header .ajokortti .container .teksti {
+    display: -ms-grid;
+    display: grid;
+    -ms-grid-rows: (20%)[5];
+        grid-template-rows: repeat(5, 20%);
+    font-size: clamp(0.7em, 2.5vw, 1em);
+  }
+  main {
+    background: #615d5d;
+  }
+  main .esittely {
+    margin: auto;
+    width: 350px;
+    height: 500px;
+    background: #121212;
+    color: rgba(255, 255, 255, 0.6);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-bottom: 1px solid black;
+    border-right: 1px solid black;
+    border-radius: 20px;
+    -webkit-box-shadow: inset -8px -8px 8px #141414;
+            box-shadow: inset -8px -8px 8px #141414;
+  }
+  main .esittely h5 {
+    font-size: clamp(1.5em, 2.5vw, 2em);
+    padding: 10px;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.87);
+  }
+  main .esittely .kaavio {
+    position: relative;
+    padding-top: 20px;
+    width: 300px;
+    height: auto;
+    margin: auto;
+    -webkit-box-shadow: 8px 8px 6px #080808, -8px -8px 6px #1c1c1c;
+            box-shadow: 8px 8px 6px #080808, -8px -8px 6px #1c1c1c;
+  }
+  main .esittely .taidot {
+    color: rgba(255, 255, 255, 0.6);
+    margin: auto;
+    height: 160px;
+    width: 300px;
+    -webkit-box-shadow: inset 8px 8px 6px #080808, inset -8px -8px 6px #1c1c1c;
+            box-shadow: inset 8px 8px 6px #080808, inset -8px -8px 6px #1c1c1c;
+  }
+  main .esittely .taidot p {
+    text-align: center;
+    padding-top: 10px;
+  }
 }
 /*# sourceMappingURL=tyyli.css.map */
