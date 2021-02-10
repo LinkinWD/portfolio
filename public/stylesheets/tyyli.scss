@@ -5,76 +5,64 @@
 
 body {
 	font-family: 'Roboto', sans-serif;
-
+	background: rgb(97, 93, 93);
 	position: relative;
 }
 
 header {
 	height: 100vh;
-	background-image: linear-gradient(#f0f40d, #a70ac0);
+	//background-image: linear-gradient(#f0f40d, #a70ac0);
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	justify-content: space-around;
 	.otsikko {
-		width: 100vw;
-		color: #a12ec9;
 		text-align: center;
 		text-transform: uppercase;
 		font-weight: 700;
-		font-size: clamp(4em, 5vw, 6em);
-		.text-wrapper {
-			position: relative;
-			display: inline-block;
-			padding-top: 0.2em;
-			padding-right: 0.05em;
-			padding-bottom: 0.1em;
-		}
-		.kirjaimet {
-			transform-origin: 50% 100%;
-			display: inline-block;
-			line-height: 1em;
-		}
+		font-size: clamp(4em, 3vw, 6em);
+		color: rgb(188, 111, 241);
+		text-shadow: 4px 4px 10px #1f1b1d;
 	}
 
 	.taustapallo1 {
 		position: absolute;
-		top: 35vh;
-		left: 35vw;
+		top: 55vh;
+		left: 50vw;
 		z-index: 1;
-		width: 250px;
-		height: 250px;
-		background: radial-gradient(circle at 100px 100px, #f80707, #000);
+		width: 50px;
+		height: 50px;
+		background: radial-gradient(circle at 10px 10px, rgb(244, 212, 124), #000);
 		border-radius: 50%;
 	}
 	.taustapallo2 {
 		position: absolute;
-		top: 40vh;
-		right: 40vw;
+		top: 50vh;
+		right: 50vw;
 		z-index: 1;
-		width: 250px;
-		height: 250px;
-		background: radial-gradient(circle at 100px 100px, #0ce98d, #000);
+		width: 50px;
+		height: 50px;
+		background: radial-gradient(circle at 10px 10px, rgb(3, 218, 198), #000);
 		border-radius: 50%;
 	}
 	.taustapallo3 {
 		position: absolute;
 		top: 55vh;
-		left: 25vw;
+		left: 50vw;
 		z-index: 1;
-		width: 250px;
-		height: 250px;
-		background: radial-gradient(circle at 100px 100px, #1eacd8, #000);
+		width: 50px;
+		height: 50px;
+		background: radial-gradient(circle at 10px 10px, rgb(188, 111, 241), #000);
 		border-radius: 50%;
 	}
 	.taustapallo4 {
 		position: absolute;
-		top: 70vh;
-		right: 25vw;
+		top: 60vh;
+		right: 50vw;
 		z-index: 1;
-		width: 250px;
-		height: 250px;
-		background: radial-gradient(circle at 100px 100px, #f80707, #000);
+		width: 50px;
+		height: 50px;
+		background: radial-gradient(circle at 10px 10px, rgb(188, 111, 241), #000);
 		border-radius: 50%;
 	}
 	.ajokortti {
@@ -112,7 +100,8 @@ header {
 /* toinen osio alkaa tästä */
 
 main {
-	background-image: linear-gradient(#a70ac0, #f0f40d);
+	// background-image: linear-gradient(#a70ac0, #f0f40d);
+	background: rgb(97, 93, 93);
 	.esittely {
 		margin: auto;
 		width: 450px;
@@ -174,6 +163,37 @@ main {
 }
 
 footer {
-	height: 100vh;
-	background-image: linear-gradient(#f0f40d, #fdfdfa);
+	// background-image: linear-gradient(#f0f40d, #fdfdfa);
+	background: rgb(97, 93, 93);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	color: rgba($color: #fff, $alpha: .6);
+	h3 {
+		margin: 50px;
+		font-size: clamp(1.2em, 2.5vw, 2em);
+	}
+	button {
+		padding: 20px 40px;
+		background: #5c5757;
+		box-shadow: 26px 26px 59px #444040, -26px -26px 59px #746e6e;
+		color: rgba($color: #fff, $alpha: .6);
+		a {
+			font-size: 2rem;
+			text-decoration: none;
+			font-weight: 700;
+			color: rgba($color: #fff, $alpha: .6);
+		}
+		i {
+			font-size: 2rem;
+
+			padding-left: 10px;
+		}
+	}
+	h4 {
+		margin-top: 20px;
+		margin-bottom: 50px;
+		font-size: clamp(1em, 2vw, 1.5em);
+	}
 }
