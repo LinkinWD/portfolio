@@ -4,13 +4,13 @@ const methodOverride = require ('method-override')
 const path = require('path')
 const mongoose = require('mongoose')
 const ejsMate = require('ejs-mate')
-const Ruoka = require('./models/ruoka')
 const session = require('express-session')
 const cookies = require('cookie-parser')
 const flash = require('connect-flash')
 const passport = require('passport')
 const LocalSctrategy = require('passport-local')
 const Käyttäjä = require('./models/käyttäjät')
+const dbUrl = process.env.DB_URL
 
 //reitti vakiot
 const vieraskirjanReitit = require('./routes/vieraskirja')
@@ -18,13 +18,16 @@ const kommenttiReitit = require('./routes/kommentit')
 const ruokalanReitit = require('./routes/ruokala')
 const käyttäjäReitit = require('./routes/käyttäjät')
 
-//errorit ja validointi
+//errorit, suojaus ja validointi
 const catchAsync = require('./utils/catchAsync')
 const ExpressError = require('./utils/expressError')
-const { onAdmin, onKirjautunut } = require('./middleware')
+const mongoSanitize = require('express-mongo-sanitize')
+const helmet = require('helmet')
+const { contentSecurityPolicy } = require('helmet')
 
 //Yhdistetään tietokantaan
-mongoose.connect('mongodb://localhost:27017/portfolio', {
+// 'mongodb://localhost:27017/portfolio'
+mongoose.connect(dbUrl, {
     useNewUrlParser: true,
     useCreateIndex: true,
     useUnifiedTopology: true,
@@ -47,11 +50,14 @@ app.use(express.static(path.join(__dirname, 'public')))
 
 //sessionit ja flash viestit
 const sessionConfig = {
+    name: 'sessionska',
     secret: process.env.SECRET,
     resave: false,
     saveUninitialized: true,
     cookie: {
+        // httpOnly cookieen ei voi laittaa javascriptiä
         httpOnly: true,
+        // secure: true,
         //millisekunnit * sekunnit * minuutit * tunnit
         expires: Date.now() + 1000 * 60 * 60 * 3,
         maxAge: 1000 * 60 * 60 * 3
@@ -59,6 +65,8 @@ const sessionConfig = {
 }
 app.use(session(sessionConfig))
 app.use(flash())
+app.use(helmet())
+
 
 //Passport(Session pitää olla ennen tätä)
 app.use(passport.initialize())
@@ -70,7 +78,11 @@ passport.deserializeUser(Käyttäjä.deserializeUser())
 
 //parse jutska ja asetetaan method-overrriden tunnus
 app.use(express.urlencoded({ extended: true}) )
+
 app.use(methodOverride('_method'))
+app.use(mongoSanitize({
+    replaceWith: '_'
+  }))
 
 //Tämä tulee olla ennen reittejä, local variables(oiskohan ne suomeksi paikalliset muuttujat :D ). Näihin pääsee kaikissa templateissa käsiksi vaikkei niitä lähetäkkään sinne. 
 app.use((req, res, next) => {
@@ -112,7 +124,7 @@ app.all('*', (req, res, next) => {
 app.use((err, req, res ,next) => {
     const {statusCode = 500} =  err 
     if(!err.message) err.message = 'Jotain meni pieleen'
-    res.status(statusCode).render('error', {err})
+     res.status(statusCode).render('error', {err})
 })
 
 app.listen(3000, () => {
