@@ -11,6 +11,10 @@ const passport = require('passport')
 const LocalSctrategy = require('passport-local')
 const Käyttäjä = require('./models/käyttäjät')
 const dbUrl = process.env.DB_URL
+const { MongoStore} = require('connect-mongo')
+
+const MongoDBStore = require('connect-mongo')(session)
+
 
 //reitti vakiot
 const vieraskirjanReitit = require('./routes/vieraskirja')
@@ -48,8 +52,22 @@ app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'ejs')
 app.use(express.static(path.join(__dirname, 'public')))
 
+
+const store = new MongoDBStore ({
+    url: dbUrl,
+    secret: process.env.SECRET,
+    // tää tulee sekunteina, eli jos käyttäjä ei muuta mitään tallentaa vain keran päivässä, ei turhaa tallentamista, kun käyttäjä refreshaa sivun
+    touchAfter: 24 * 60 *60
+})
+
+store.on('error', function(e) {
+    console.log('session errori', e)
+})
+
 //sessionit ja flash viestit
 const sessionConfig = {
+    //voi kirjoittaa myös store: store
+    store,
     name: 'sessionska',
     secret: process.env.SECRET,
     resave: false,
