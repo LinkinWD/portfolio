@@ -16,8 +16,8 @@
             
             <div class="col-6">             
                 <form action="/ruokala/kassa/<%=tuote._id%>?_method=PUT" method="POST">
-                    <input type="range" value="<%= tuote.määrä %>" min="1" max="20" oninput="this.nextElementSibling.value = this.value" name="ruokala[määrä]" class="form-control">
-                <output><%=tuote.määrä%></output>
+                    <input type="range" id="range" value="<%= tuote.määrä %>" min="1" max="20"  name="ruokala[määrä]" class="form-control">
+                    <p id="tulos"></p>
                 <span>Annosta</span><br>
                 <button class="btn btn-warning">muuta</button>
                 </form>
