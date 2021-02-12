@@ -11,7 +11,7 @@ const passport = require('passport')
 const LocalSctrategy = require('passport-local')
 const Käyttäjä = require('./models/käyttäjät')
 const dbUrl = process.env.DB_URL
-const { MongoStore} = require('connect-mongo')
+
 
 const MongoDBStore = require('connect-mongo')(session)
 
@@ -145,6 +145,7 @@ app.use((err, req, res ,next) => {
      res.status(statusCode).render('error', {err})
 })
 
-app.listen(3000, () => {
+const port = process.env.PORT || 3000
+app.listen(port, () => {
     console.log('Localhost toiminnassa...')
 })
