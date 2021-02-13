@@ -2,7 +2,7 @@
 
 
 <h1 class="text-center">Tee tilaus</h1>
-
+<p class="text-center">Täällä voit tilata tuotteita, tieto tilaajasta ja tilauksesta rekistöröityy kassa sivulle.</p>
 <!-- myynnissä olevat tuotteet -->
 <div class="header row">
     <h1 class="text-center">Myytävänä olevat tuotteet</h1>
@@ -22,8 +22,8 @@
         <% for(tuote of tuotteet) { %> 
             <div class="col-sm-3 lh-1"><strong> <%= tuote.nimi %></strong> </div>
             <div class="col-sm-3 lh-1"><span class="d-xl-none d-sm-inline">Annoskoko: </span> <%= tuote.annoskoko %> </div>
-            <div class="col-sm-3 lh-1"><span class="d-xl-none d-sm-inline">Jäljellä: </span> <%= tuote.määrä %> </div>
-            <div class="col-sm-3 lh-1"><span class="d-xl-none d-sm-inline">Hinta: </span><%= tuote.hinta %> </div>
+            <div class="col-sm-3 lh-1"><span class="d-xl-none d-sm-inline">Jäljellä: </span> <%= tuote.määrä %> kpl</div>
+            <div class="col-sm-3 lh-1"><span class="d-xl-none d-sm-inline">Hinta: </span><%= tuote.hinta %> €</div>
             <hr>
         <% }  %> 
 </div>     

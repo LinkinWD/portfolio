@@ -16,9 +16,9 @@
             
             <div class="col-6">             
                 <form action="/ruokala/kassa/<%=tuote._id%>?_method=PUT" method="POST">
-                    <input type="range" id="range" value="<%= tuote.määrä %>" min="1" max="20"  name="ruokala[määrä]" class="form-control">
-                    <p id="tulos"></p>
-                <span>Annosta</span><br>
+                    <input type="range" id="range" value="<%= tuote.määrä %>" min="1" max="20"  name="ruokala[määrä]" class="form-control" oninput="this.nextElementSibling.value = this.value">
+                   
+                   <output><%= tuote.määrä %> </output><span> :Annosta</span>
                 <button class="btn btn-warning">muuta</button>
                 </form>
             </div>
@@ -45,7 +45,7 @@
             
             <% for(tilaus of tilaukset) { %> 
             <div class="col-9">
-                <p class="lh-1 text-center"><%= tilaus.tuote %> </p>
+                <p class="lh-1 text-center"><strong><%= tilaus.tuote %> </strong></p>
                 <p class="lh-1">Määrä: <%= tilaus.määrä %> </p>
                 <p class="lh-1">Tilaaja: <%= tilaus.tilaaja.username %> </p>            
                 <p class="lh-1"><%= tilaus.tilaaja.email %> </p>
